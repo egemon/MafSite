@@ -1,17 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <% include partials/head %>
-</head>
-<body>
-<div id="page-container">
-    <% include partials/header %>
-    <main>
-    	<%for(var i = 0; i < news.length; i++) {
-    		var data = news[i];%>
-        <% include partials/meeting %>
-        <%}%>
-    </main>
-</div>
-</body>
-</html>
+<article ng-repeat="(i, new) in news">
+    <title>{{new.number}}ая встреча. Ждем Вас!</title>
+    <p>
+       Традиционно приглашаем Вас на <a href="https://vk.com/bs_vstrecha_{{new.number}}" target="_blank">встречу клуба</a> мафии Baker Street 221b!
+    </p>
+    <p>
+       Что? - {{new.what}}
+    </p>
+    <p>
+      Где? -
+      <a href="https://goo.gl/oFev5u">
+       {{new.where}}
+      </a>
+    </p>
+    <p id="when{{i}}">
+       Когда? -
+    </p>
+    <p>
+       Члеский взнос? - {{new.price}} за вечер игр
+    </p>
+    <p>
+      С уважением, команда организаторов.
+    </p>
+</article>

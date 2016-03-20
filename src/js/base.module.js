@@ -1,1 +1,1 @@
-angular.module('base', ['ui.router']);
+angular.module('base', ['ui.router', 'server']);
