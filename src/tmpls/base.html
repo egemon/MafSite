@@ -18,8 +18,8 @@
     </div>
     <nav>
         <ul class="main-menu">
-            <li class="main-menu-item current" ng-repeat="(i, page) in PAGES" >
-                <a class="main-menu-ref" ui-sref="{{'/' + page.url}}">
+            <li class="main-menu-item" ng-repeat="(i, page) in PAGES" ng-class="{current:number == i}">
+                <a class="main-menu-ref" ui-sref="{{'/' + page.url}}" ng-click="setPage(i)">
                     {{page.name}}
                 </a>
             </li>
