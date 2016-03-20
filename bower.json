@@ -1,0 +1,29 @@
+{
+  "name": "MafSite_Angular",
+  "version": "0.0.0",
+  "authors": [
+    "ilukianov <ilukianov@cogniance.com>"
+  ],
+  "description": "Client side for site of BakerStreet Mafia Club",
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "install": {
+    "path": {
+      "css": "src/css/lib",
+      "js": "src/js/lib"
+    }
+  },
+  "dependencies": {
+    "angular": "^1.5.2",
+    "angular-ui-router": "^0.2.18"
+  }
+}

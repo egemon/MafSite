@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="base">
+<head>
+    <meta charset="UTF-8">
+    <title>BakerStreet 221b Mafia Club</title>
+    <link rel="stylesheet" type="text/css" href="../css/base.css">
+</head>
+<body ng-controller="baseCtrl">
+    <a ng-repeat="(i, page) in PAGES" ui-sref="{{'/' + page.url}}">{{page.name}}</a>
+
+
+    <div ui-view>
+    </div>
+</body>
+
+
+
+<script src="../js/lib/angular/angular.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/lib/angular-ui-router/release/angular-ui-router.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/base.module.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="../js/router.config.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/config.constant.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/pages.constant.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/base.controller.js" type="text/javascript" charset="utf-8"></script>
+</html>
