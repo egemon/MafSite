@@ -6,11 +6,28 @@
     <link rel="stylesheet" type="text/css" href="../css/base.css">
 </head>
 <body ng-controller="baseCtrl">
-    <a ng-repeat="(i, page) in PAGES" ui-sref="{{'/' + page.url}}">{{page.name}}</a>
-
-
-    <div ui-view>
+<header id="header">
+    <div class="page-title-container">
+        <a id="page-logo-ref" href="/home">
+            <img src="../img/main_logo.png" alt="BakerLogo" id="pageLogo">
+        </a>
+        <div id="page-title">
+            <div class="page-title-part">"Baker Street 221b"</div>
+            <div class="page-title-part">Mafia Club</div>
+        </div>
     </div>
+    <nav>
+        <ul class="main-menu">
+            <li class="main-menu-item current" ng-repeat="(i, page) in PAGES" >
+                <a class="main-menu-ref" ui-sref="{{'/' + page.url}}">
+                    {{page.name}}
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+    <main ui-view id="page-container">
+    </main>
 </body>
 
 
@@ -23,4 +40,5 @@
 <script src="../js/config.constant.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/pages.constant.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/base.controller.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/base.js" type="text/javascript" charset="utf-8"></script>
 </html>
