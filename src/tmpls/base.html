@@ -18,9 +18,9 @@
     </div>
     <nav>
         <ul class="main-menu">
-            <li class="main-menu-item" ng-repeat="(i, page) in PAGES" ng-class="{current:number == i}">
-                <a class="main-menu-ref" ui-sref="{{'/' + page.url}}" ng-click="setPage(i)">
-                    {{page.name}}
+            <li class="main-menu-item" ng-repeat="(i, thisPage) in PAGES" ng-class="{current:thisPage.url == page}">
+                <a class="main-menu-ref" ui-sref="{{'/' + thisPage.url}}" ng-click="setPage(thisPage.url, i)">
+                    {{thisPage.name}}
                 </a>
             </li>
         </ul>

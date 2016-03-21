@@ -4,11 +4,15 @@ angular.module('server')
 function serverService ($http, CONFIG) {
 
     serverService.prototype.DFRDfetchData = function(pageUrl, data) {
-        return $http.get(CONFIG.BASE_SERVER_URL + pageUrl).then(function (data) {return data} ,this.failCallback);
+        return $http.get(CONFIG.BASE_SERVER_URL + pageUrl).catch(this.failCallback);
     };
 
     serverService.prototype.failCallback = function(err) {
-        console.error('server.service.js failCallback()', err);
+        console.log('server.service.js failCallback()', err);
+        throw {
+            status: err.status,
+            text: err.statusText
+        };
     };
 
 }
