@@ -1,28 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <% include partials/head %>
-</head>
-<body>
-<div id="page-container">
-    <% include partials/header %>
-    <main>
-        <div class="top-block">
-        <%console.log("periods = ",periods)%>
-        <% for(var i = 0; i < periods.length; i++) { %>
-        <%var period = periods[i]%>
-        <%console.log("period = ",period)%>
-            <title class="top-title"><%=period.title%></title>
-            <div id="top-players">
-                <% for(var j = 0; j < period.honours.length; j++) { %>
-                <%var player = period.honours[j]%>
-                    <div class="player" id="top<%=j+1%>-player">
-                        <% include partials/player %>
-                    </div>
-                <%}%>
+<div class="top-block">
+    <div ng-repeat="(i, period) in hall_of_fame">
+        <title class="top-title">{{period.title}}</title>
+        <div id="top-players">
+            <div ng-repeat="(j, player) in period.honours" class="player" id="top{{j+1}}-player" ng-include="'pages/partials/player.html'">
             </div>
-        <%}%>
-    </main>
+        </div>
+    </div>
 </div>
-</body>
-</html>
