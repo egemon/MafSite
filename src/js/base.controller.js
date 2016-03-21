@@ -1,6 +1,6 @@
 angular.module('base')
-.controller('baseCtrl', ['PAGES', '$scope', 'serverService', '$timeout', '$window',
-function(PAGES, $scope, serverService, $timeout, $window) {
+.controller('baseCtrl', ['PAGES', '$scope', 'serverService', '$timeout', '$window', '$location',
+function(PAGES, $scope, serverService, $timeout, $window, $location) {
 
     animateLogo();
 
@@ -17,7 +17,7 @@ function(PAGES, $scope, serverService, $timeout, $window) {
 
     $scope.setPage = function setPage (page, n) {
         $scope.page = page;
-        if (PAGES[n].needData) {
+        if ($location.url() != ('/' + page) && PAGES[n].needData) {
             fetchDataFor(page)
             .then(handleData.bind(this, page), handleError.bind(this, page));
         }
