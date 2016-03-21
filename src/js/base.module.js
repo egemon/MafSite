@@ -1,1 +1,1 @@
-angular.module('base', ['ui.router', 'server']);
+angular.module('base', ['ui.router', 'server', 'ngAnimate']);

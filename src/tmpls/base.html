@@ -5,28 +5,28 @@
     <title>BakerStreet 221b Mafia Club</title>
     <link rel="stylesheet" type="text/css" href="../css/base.css">
 </head>
-<body ng-controller="baseCtrl">
-<header id="header">
-    <div class="page-title-container">
-        <a id="page-logo-ref" href="/home">
-            <img src="../img/main_logo.png" alt="BakerLogo" id="pageLogo">
-        </a>
-        <div id="page-title">
-            <div class="page-title-part">"Baker Street 221b"</div>
-            <div class="page-title-part">Mafia Club</div>
+<body id="page-container" ng-controller="baseCtrl">
+    <header id="header">
+        <div class="page-title-container">
+            <a id="page-logo-ref" ui-sref="{{'/' + PAGES[0].url}}">
+                <img src="../img/main_logo.png" alt="BakerLogo" id="pageLogo" ng-class="logoClass">
+            </a>
+            <div id="page-title">
+                <div class="page-title-part">"Baker Street 221b"</div>
+                <div class="page-title-part">Mafia Club</div>
+            </div>
         </div>
-    </div>
-    <nav>
-        <ul class="main-menu">
-            <li class="main-menu-item" ng-repeat="(i, thisPage) in PAGES" ng-class="{current:thisPage.url == page}">
-                <a class="main-menu-ref" ui-sref="{{'/' + thisPage.url}}" ng-click="setPage(thisPage.url, i)">
-                    {{thisPage.name}}
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-    <main ui-view id="page-container">
+        <nav>
+            <ul class="main-menu">
+                <li class="main-menu-item" ng-repeat="(i, thisPage) in PAGES" ng-class="{current:thisPage.url == page}">
+                    <a class="main-menu-ref" ui-sref="{{'/' + thisPage.url}}" ng-click="setPage(thisPage.url, i)">
+                        {{thisPage.name}}
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main ui-view>
     </main>
 </body>
 
@@ -34,6 +34,7 @@
 
 <script src="../js/lib/angular/angular.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/lib/angular-ui-router/release/angular-ui-router.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/lib/angular-animate/angular-animate.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/base.module.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/config.module.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/server.module.js" type="text/javascript" charset="utf-8"></script>
@@ -45,5 +46,5 @@
 <script src="../js/config.constant.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/pages.constant.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/base.controller.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/base.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/plain/base.js" type="text/javascript" charset="utf-8"></script>
 </html>

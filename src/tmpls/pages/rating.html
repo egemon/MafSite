@@ -1,16 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <% include partials/head %>
-    <script src="public/views/js/rating.js" type="text/javascript" charset="utf-8" async defer></script>
-</head>
-<body>
-<div id="page-container">
-    <% include partials/header %>
-    <main>
-    <% include partials/authform %>
-    <% include partials/rating/ratingData %>
-    </main>
+<button class="form-button" id='showLogin' ng-click="isOrg = !isOrg">Я орг</button>
+<div id="authform" ng-show="isOrg == true">
+    <input class="form-input" id="user" type="text" placeholder="Ник" ng-model="user">
+    <input class="form-input" id="password" type="password" placeholder="Пароль" ng-model="password">
+    <button id="authButton" class="form-button" ng-click="login(user, password)">Войти</button>
 </div>
-</body>
-</html>
+<table class="table table-bordered table-striped" id="ratingTable" border='1'>
+  <thead>
+    <tr>
+      <th>Фото</th>
+      <th>Ник</th>
+      <th>Сумма</th>
+      <th>Игр</th>
+      <th>Среднее</th>
+      <th>Лучшие от игроков</th>
+      <th>Лучшие от Судей</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="rating-row" id="{{player.name}}" ng-repeat="(i, player) in rating">
+      <td id="{{player.avatar}}">
+        <img class="playerAvatarInRating"
+        onerror="this.src='../img/main_logo.png'; this.onerror=''"
+        src="../../data-base/players/img/{{player.name}}.jpg"
+        alt="">
+      </td>
+      <td>{{player.name}}</td>
+      <td>{{player.sum}}</td>
+      <td>{{player.gameNumber}}</td>
+      <td>{{player.sum / player.gameNumber | number:2}}</td>
+      <td>{{player.BP}}</td>
+      <td>{{player.BR}}</td>
+    </tr>
+  </tbody>
+</table>
+<script src="../js/plain/rating.js" type="text/javascript" charset="utf-8"></script>
