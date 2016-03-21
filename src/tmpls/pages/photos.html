@@ -1,18 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <% include partials/head %>
-</head>
-<body>
-<div id="page-container">
-    <% include partials/header %>
-    <main>
-		<%for(var i = 0; i < pages[current].photos.length; i++) {
-			var photo = pages[current].photos[i]	
-		%>
-    		<% include partials/photo %>
-		<%}%>
-	</main>
+<div class="photo" ng-repeat="(i, photo) in photos">
+    <a href="{{photo.href}}" title="{{photo.title}}" target="_blank">
+        <img class="photo-logo"
+        onerror="this.src='../img/main_logo_black2.png'; this.onerror=''"
+        ng-src="{{photo.src}}"
+        alt="{{photo.title}}"
+        >
+    </a>
+    <p class="photo-title">{{photo.title}}</p>
+    <p class="photo-date">{{photo.date}}</p>
 </div>
-</body>
-</html>
