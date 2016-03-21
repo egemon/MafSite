@@ -1,0 +1,20 @@
+<!-- <a href="{{player.vk}}" target="_blank" ng-i="player.vk"> -->
+    <img
+    class="player-logo"
+    src="../../../bs/data-base/players/img/{{player.img}}.jpg"
+    alt="{{player.nick}}"
+    ng-click="openNewTab(player.vk)"
+    vk={{player.vk}}
+    >
+<!-- </a> -->
+<p class="player-nick">{{player.nick}}</p>
+<p class="player-results" ng-show="player.avr">{{player.avr + ' средний бал '}}{{'(' + player.gameNumber + ' игр)'}}</p>
+<p class="player-faculty">{{player.faculty}}</p>
+<p class="player-exp">{{player.experiance}}</p>
+<div class="honours">
+    <div
+    ng-repeat="(j, honour) in player.honours"
+    title="{{honour.title}}"
+    class="{{honour.type}}-{{honour.place}} honour"
+    ></div>
+</div>

@@ -1,6 +1,6 @@
 angular.module('base')
-.controller('baseCtrl', ['PAGES', '$scope', 'serverService', '$timeout',
-function(PAGES, $scope, serverService, $timeout) {
+.controller('baseCtrl', ['PAGES', '$scope', 'serverService', '$timeout', '$window',
+function(PAGES, $scope, serverService, $timeout, $window) {
 
     animateLogo();
 
@@ -23,6 +23,11 @@ function(PAGES, $scope, serverService, $timeout) {
         }
     };
 
+    $scope.openNewTab = function openNewTab (url) {
+        if (url) {
+            $window.open(url, '_blank');
+        }
+    };
 
     // ===== private mehtods
 
