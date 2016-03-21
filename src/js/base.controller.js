@@ -1,5 +1,5 @@
 angular.module('base')
-.controller('baseCtrl', ['PAGES', '$scope', 'serverService', function(PAGES, $scope, serverService){
+.controller('baseCtrl', ['PAGES', '$scope', 'serverService', function(PAGES, $scope, serverService) {
     $scope.page = 'home';
     $scope.PAGES = PAGES;
 
