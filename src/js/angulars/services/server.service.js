@@ -1,9 +1,9 @@
 angular.module('server')
-.service('serverService', ['$http', 'CONFIG', serverService]);
-
-function serverService ($http, CONFIG) {
+.service('serverService', ['$http', 'CONFIG', function serverService ($http, CONFIG) {
 
     serverService.prototype.$_fetchData = function(pageUrl, data) {
+
+        console.log('data = ', data);
         return $http.post(CONFIG.BASE_SERVER_URL + pageUrl).catch(this.failCallback);
     };
 
@@ -21,4 +21,5 @@ function serverService ($http, CONFIG) {
             password: pass
         }).catch(this.failCallback);
     };
-}
+}]);
+

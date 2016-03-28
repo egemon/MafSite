@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="base">
+<html lang="en" ng-app="base" ng-strict-di>
 <head>
     <meta charset="UTF-8">
     <title>BakerStreet 221b Mafia Club</title>
-    <link rel="stylesheet" type="text/css" href="../css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/base.min.css">
 </head>
 <body id="page-container" ng-controller="baseCtrl">
     <header id="header">
         <div class="page-title-container">
             <a id="page-logo-ref" ui-sref="{{'/' + PAGES[0].url}}">
-                <img src="../img/main_logo.png" alt="BakerLogo" id="pageLogo" ng-class="logoClass">
+                <img src="img/main_logo.png" alt="BakerLogo" id="pageLogo" ng-class="logoClass">
             </a>
             <div id="page-title">
                 <div class="page-title-part">"Baker Street 221b"</div>
@@ -30,16 +30,6 @@
     </main>
 
 
-    <script src="../js/lib/angular/angular.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../js/lib/angular-ui-router/release/angular-ui-router.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../js/lib/angular-animate/angular-animate.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../js/base.module.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../js/config.module.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../js/server.module.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../js/server.service.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../js/router.config.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../js/config.constant.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../js/pages.constant.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../js/base.controller.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/main.min.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>

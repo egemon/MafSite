@@ -1,9 +1,9 @@
 @font-face {
-    font-family: Barocco_Floral_Initial;
+    font-family: 'Barocco_Floral_Initial';
     src: url(../fonts/Barocco_Floral_Initial.ttf);
 }
 @font-face {
-    font-family: old_english;
+    font-family: 'old_english';
     src: url(../fonts/old_english.ttf);
 }
 
@@ -303,25 +303,21 @@ td,th {
 }
 
 .rating-row.ng-enter, .rating-row.ng-move {
-  -webkit-transition:1s linear all;
-  -moz-transition:1s linear all;
-  -o-transition:1s linear all;
-  transition:1s linear all;
-  opacity: 0;
+    -webkit-transition:1s linear all;
+    -moz-transition:1s linear all;
+    -o-transition:1s linear all;
+    transition:1s linear all;
+    opacity: 0;
 }
 
 .rating-row.ng-enter.ng-enter-active,
 .rating-row.ng-move.ng-move-active {
-  opacity:1;
+    opacity:1;
 }
 
 .animating-started {
     transition:1s linear all;
     transform: scale(-1,1);
-}
-
-.animating-ended {
-    transform: scale(1,1);
 }
 
 .player-logo[vk^="http"]{
