@@ -32,7 +32,7 @@ gulp.task('lint', function () {
 
 gulp.task('htmlmin', function () {
     return gulp.src(['src/tmpls/base.html'])
-    .pipe(htmlmin({collapseWhitespace: true}))
+    // .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest('dist/assets'));
 });
 
@@ -63,8 +63,8 @@ gulp.task('js', ['lint', 'tmpls'], function() {
     .pipe(add.append('src/js/angulars/modules/*.js'))
     .pipe(add.append(['src/js/angulars/**/*.js', '!src/js/angulars/modules/*.js']))
     .pipe(concat('main.js'))
+    // .pipe(uglify())
     .pipe(rename({suffix: '.min'}))
-    .pipe(uglify())
     .pipe(gulp.dest('dist/assets/js'))
     .pipe(notify({ message: 'Scripts task complete' }));
 });
@@ -81,7 +81,7 @@ gulp.task('clean', function() {
 });
 
 gulp.task('default', ['clean'], function() {
-    gulp.start('css', 'js', 'img', 'htmlmin', 'font');
+    return gulp.start('css', 'js', 'img', 'htmlmin', 'font');
 });
 
 
@@ -90,20 +90,25 @@ gulp.task('default', ['clean'], function() {
 gulp.task('watch', function() {
 
   // Watch .scss files
-  gulp.watch('src/css/**/*.css', ['css']);
+  gulp.watch('src/css/**/*.css', ['css', 'deploy']);
 
   // Watch .js files
-  gulp.watch('src/js/**/*.js', ['js']);
+  gulp.watch('src/js/**/*.js', ['js', 'deploy']);
 
   // Watch image files
-  gulp.watch('src/img/**/*', ['img']);
+  gulp.watch('src/img/**/*', ['img', 'deploy']);
 
   // Watch image files
-  gulp.watch('src/tmpls/base.html', ['htmlmin']);
+  gulp.watch('src/tmpls/base.html', ['htmlmin', 'deploy']);
 
   // Create LiveReload server
   livereload.listen({reloadPage: 'dist/assets/base.html'});
 
   // Watch any files in dist/, reload on change
   gulp.watch(['dist/**']);
+});
+
+gulp.task('deploy', function () {
+  return gulp.src('dist/**/**')
+    .pipe(gulp.dest('../bs/public/MafSite'));
 });
