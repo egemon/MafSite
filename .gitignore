@@ -1,3 +1,4 @@
 src/js/lib/*
 node_modules/*
 dist/*
+src/js/angulars/configs/templates.js
