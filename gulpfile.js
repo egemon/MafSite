@@ -1,8 +1,8 @@
 var gulp = require('gulp'),
     // ngAnnotate = require('browserify-ngannotate'),
-    cssnano = require('gulp-cssnano'),
+    // cssnano = require('gulp-cssnano'),
     jshint = require('gulp-jshint'),
-    uglify = require('gulp-uglify'),
+    // uglify = require('gulp-uglify'),
     imagemin = require('gulp-imagemin'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat'),
@@ -11,15 +11,16 @@ var gulp = require('gulp'),
     livereload = require('gulp-livereload'),
     browserify = require('gulp-browserify'),
     add = require('gulp-add-src'),
-    htmlmin = require('gulp-htmlmin'),
+    // htmlmin = require('gulp-htmlmin'),
     templateCache = require('gulp-angular-templatecache'),
+    runSequence = require('run-sequence'),
     del = require('del');
 
 gulp.task('css', function() {
   return gulp.src('src/css/**')
     .pipe(gulp.dest('dist/assets/css'))
     .pipe(rename({suffix: '.min'}))
-    .pipe(cssnano())
+    // .pipe(cssnano())
     .pipe(gulp.dest('dist/assets/css'))
     .pipe(notify({ message: 'Styles task complete' }));
 });
@@ -30,7 +31,7 @@ gulp.task('lint', function () {
     .pipe(jshint.reporter('default'));
 });
 
-gulp.task('htmlmin', function () {
+gulp.task('html', function () {
     return gulp.src(['src/tmpls/base.html'])
     // .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest('dist/assets'));
@@ -49,7 +50,8 @@ gulp.task('font', function () {
 
 gulp.task('tmpls', function () {
   return gulp.src('src/tmpls/**/*.html')
-    .pipe(templateCache('src/js/angulars/configs/templtes.run.js'));
+    .pipe(templateCache())
+    .pipe(gulp.dest('src/js/angulars/configs'));
 });
 
 
@@ -81,25 +83,32 @@ gulp.task('clean', function() {
 });
 
 gulp.task('default', ['clean'], function() {
-    return gulp.start('css', 'js', 'img', 'htmlmin', 'font');
+  return gulp.start('css', 'js', 'img', 'htmlmin', 'font');
 });
 
 
+
+//GENERAL WATCHER
+function reactOn(task) {
+  return function reacter() {
+    runSequence(task, 'deploy');
+  };
+}
 
 // watchers
 gulp.task('watch', function() {
 
   // Watch .scss files
-  gulp.watch('src/css/**/*.css', ['css', 'deploy']);
+  gulp.watch('src/css/**/*.css', reactOn('css'));
 
   // Watch .js files
-  gulp.watch('src/js/**/*.js', ['js', 'deploy']);
+  gulp.watch(['src/js/**/*.js', 'src/tmpls/pages/**/*.html', '!src/js/angulars/configs/templates.js'], reactOn('js'));
 
   // Watch image files
-  gulp.watch('src/img/**/*', ['img', 'deploy']);
+  gulp.watch('src/img/**/*', reactOn('img'));
 
   // Watch image files
-  gulp.watch('src/tmpls/base.html', ['htmlmin', 'deploy']);
+  gulp.watch('src/tmpls/base.html', reactOn('html'));
 
   // Create LiveReload server
   livereload.listen({reloadPage: 'dist/assets/base.html'});

@@ -1,8 +1,7 @@
 angular.module('base')
-.config(['CONFIG', 'PAGES', '$stateProvider', '$urlRouterProvider', '$locationProvider',
-  function(CONFIG, PAGES, $stateProvider, $urlRouterProvider, $locationProvider) {
+.config(['CONFIG', 'PAGES', '$stateProvider', '$urlRouterProvider',
+  function(CONFIG, PAGES, $stateProvider, $urlRouterProvider) {
   var tmplsUrl = CONFIG.TEMPLATES_URL;
-  $locationProvider.html5Mode(true);
   $urlRouterProvider.otherwise('/' + PAGES[0].url);
 
   for (var i = 0; i < PAGES.length; i++) {
