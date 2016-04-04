@@ -4,30 +4,35 @@ function(PAGES, $scope, serverService, $timeout, $window, $location) {
 
     animateLogo();
 
-    $scope.page = 'home';
+    console.log('$window', $window);
+    var page = $location.path().slice(1);
+    setPage(page, isDataNeededFor(page));
     $scope.PAGES = PAGES;
     $scope.isOrg = false;
 
+    $scope.login = login;
+    $scope.setPage = setPage;
+    $scope.openNewTab =  openNewTab;
 
-
-    $scope.login = function login (user, pass) {
+    // ===== public methods
+    function login (user, pass) {
         serverService.$_login(user, pass)
         .then(handleLogin);
-    };
+    }
 
-    $scope.setPage = function setPage (page, n) {
+    function setPage (page) {
         $scope.page = page;
-        if ($location.url() != ('/' + page) && PAGES[n].needData) {
+        if (isDataNeededFor(page)) {
             fetchDataFor(page)
             .then(handleData.bind(this, page), handleError.bind(this, page));
         }
-    };
+    }
 
-    $scope.openNewTab = function openNewTab (url) {
+    function openNewTab (url) {
         if (url) {
             $window.open(url, '_blank');
         }
-    };
+    }
 
     // ===== private mehtods
 
@@ -59,6 +64,17 @@ function(PAGES, $scope, serverService, $timeout, $window, $location) {
             alert(response.data);
         } else {
             window.location.pathname = response.data;
+        }
+    }
+
+    function isDataNeededFor (page) {
+        console.log('page', page);
+        console.log('PAGES', PAGES);
+        for (var i = 0; i < PAGES.length; i++) {
+            var el = PAGES[i];
+            if (el.url == page) {
+                return el.needData;
+            }
         }
     }
 
