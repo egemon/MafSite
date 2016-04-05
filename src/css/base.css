@@ -17,6 +17,7 @@
     margin: 0;
 }
 html, body {
+    height: 100%;
     background: #b89b70;
     background: -moz-radial-gradient(top, ellipse cover, #b89b70 0%, #78553d 100%);
     background: -webkit-gradient(radial, top top, 0px, top top, 100%, color-stop(0%, #b89b70), color-stop(100%, #78553d));
