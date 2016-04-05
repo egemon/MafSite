@@ -1,6 +1,7 @@
 angular.module('base', ['ui.router', 'server', 'ngAnimate', 'templates'],
   ['CONFIG', 'PAGES', '$stateProvider', '$urlRouterProvider',
   function(CONFIG, PAGES, $stateProvider, $urlRouterProvider) {
+    CONFIG.BASE_SERVER_URL = location.origin + '/';
     var tmplsUrl = CONFIG.TEMPLATES_URL;
     $urlRouterProvider.otherwise('/' + PAGES[0].url);
 
