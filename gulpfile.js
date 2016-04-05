@@ -97,6 +97,12 @@ function reactOn(task) {
 
 // watchers
 gulp.task('watch', function() {
+  // Create LiveReload server
+ livereload.listen({
+  start: true,
+  port: 8030,
+  host: 'localhost'
+ });
 
   // Watch .scss files
   gulp.watch('src/css/**/*.css', reactOn('css'));
@@ -110,8 +116,6 @@ gulp.task('watch', function() {
   // Watch image files
   gulp.watch('src/tmpls/base.html', reactOn('html'));
 
-  // Create LiveReload server
-  livereload.listen({reloadPage: 'dist/assets/base.html'});
 
   // Watch any files in dist/, reload on change
   gulp.watch(['dist/**']);
@@ -119,5 +123,6 @@ gulp.task('watch', function() {
 
 gulp.task('deploy', function () {
   return gulp.src('dist/**/**')
-    .pipe(gulp.dest('../bs/public/MafSite'));
+    .pipe(gulp.dest('../bs/public/MafSite'))
+    .pipe(livereload());
 });
