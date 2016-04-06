@@ -4,27 +4,30 @@ function(PAGES, $scope, serverService, $timeout, $window, $location) {
 
     animateLogo();
 
-    console.log('$window', $window);
-    var page = $location.path().slice(1);
-    setPage(page, isDataNeededFor(page));
+    var pageUrl = $location.path().slice(1);
+    var page = findPageByUrl(pageUrl);
+    setPage(page);
     $scope.PAGES = PAGES;
     $scope.isOrg = false;
+    $scope.user = serverService.player;
+    console.log('$scope.user.memberLevel', $scope.user.memberLevel);
 
     $scope.login = login;
     $scope.setPage = setPage;
     $scope.openNewTab =  openNewTab;
 
     // ===== public methods
-    function login (user, pass) {
-        serverService.$_login(user, pass)
-        .then(handleLogin);
+    function login () {
+        serverService.$_login();
     }
 
     function setPage (page) {
+        console.log('[baseCtrl] setPage()', arguments);
         $scope.page = page;
-        if (isDataNeededFor(page)) {
-            fetchDataFor(page)
-            .then(handleData.bind(this, page), handleError.bind(this, page));
+
+        if (page.needData || page.needMemberLevel) {
+            fetchDataFor(page, page.needMemberLevel)
+            .then(handleData.bind(this, page));
         }
     }
 
@@ -43,37 +46,30 @@ function(PAGES, $scope, serverService, $timeout, $window, $location) {
         }, 1500);
     }
 
-    function fetchDataFor (page) {
-        return serverService.$_fetchData(page);
+    function fetchDataFor (page, needMemberLevel) {
+        console.log('[base.controller] fetchDataFor()', arguments);
+        return serverService.$_fetchData(page.url, needMemberLevel).catch(handleError.bind(this, page));
     }
 
     function handleData (page, response) {
+        console.log('[base.controller] handleData()', arguments);
         if (!response) {
             return;
         }
-        console.log('base.controller.js $_fetchData() done', response);
-        $scope[page] = response.data;
+        $scope[page.url] = response.data;
     }
 
     function handleError (page, err) {
+        console.log('[base.controller] handleError()', arguments);
         $scope.err = err;
     }
 
-    function handleLogin (response) {
-        if (response.data === 'Не правильный пароль!') {
-            alert(response.data);
-        } else {
-            window.location.pathname = response.data;
-        }
-    }
-
-    function isDataNeededFor (page) {
-        console.log('page', page);
-        console.log('PAGES', PAGES);
+    function findPageByUrl(url) {
+        console.log('[base.controller] findPageByUrl()', arguments);
         for (var i = 0; i < PAGES.length; i++) {
             var el = PAGES[i];
-            if (el.url == page) {
-                return el.needData;
+            if (el.url == url) {
+                return el;
             }
         }
     }

@@ -4,29 +4,43 @@ angular.module('base')
     // default page
     url: 'home',
     name: 'О нас',
-    needData: false
+    needMemberLevel: 0
 },{
     url: 'news',
     name: 'Новости',
-    needData: true
+    needData: true,
+    needMemberLevel: 0
 },{
     url: 'rating',
     name: 'Рейтинг',
-    needData: true
+    needData: true,
+    needMemberLevel: 0
 },{
     url: 'members',
     name: 'Члены клуба',
-    needData: true
+    needData: true,
+    needMemberLevel: 0
 },{
     url: 'hall_of_fame',
     name: 'Зал Славы',
-    needData: true
+    needData: true,
+    needMemberLevel: 0
 },{
     url: 'photos',
     name: 'Фото',
-    needData: true
+    needData: true,
+    needMemberLevel: 0
 },{
     url: 'contacts',
     name: 'Контакты',
-    needData: true
+    needData: true,
+    needMemberLevel: 0
+},{
+    url: 'protocols',
+    name: 'Бланки',
+    needMemberLevel: 3
+},{
+    url: 'admin',
+    name: 'База',
+    needMemberLevel: 3
 }]);
