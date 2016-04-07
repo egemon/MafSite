@@ -1,8 +1,11 @@
+var isProduction = false;
 var gulp = require('gulp'),
-    // ngAnnotate = require('browserify-ngannotate'),
-    // cssnano = require('gulp-cssnano'),
+    _if = require('gulp-if'),
+    cssnano = require('gulp-cssnano'),
+    cssbeautify = require('gulp-cssbeautify'),
     jshint = require('gulp-jshint'),
-    // uglify = require('gulp-uglify'),
+    beautify = require('gulp-beautify'),
+    uglify = require('gulp-uglify'),
     imagemin = require('gulp-imagemin'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat'),
@@ -11,85 +14,101 @@ var gulp = require('gulp'),
     livereload = require('gulp-livereload'),
     browserify = require('gulp-browserify'),
     add = require('gulp-add-src'),
-    // htmlmin = require('gulp-htmlmin'),
+    htmlmin = require('gulp-htmlmin'),
     templateCache = require('gulp-angular-templatecache'),
     runSequence = require('run-sequence'),
     del = require('del');
 
-gulp.task('css', function() {
-  return gulp.src('src/css/main.min.css')
-    .pipe(add.append(['src/css/**', '!src/css/main.min.css']))
-    .pipe(concat('base.css'))
-    .pipe(gulp.dest('dist/assets/css'))
-    .pipe(rename({suffix: '.min'}))
-    // .pipe(cssnano())
-    .pipe(gulp.dest('dist/assets/css'))
-    .pipe(notify({ message: 'CSS task complete' }));
-});
 
+// ========== JS TASKS =============
+// lints js code with jshint
 gulp.task('lint', function () {
-    return gulp.src('src/js/*.js')
+    return gulp.src(['src/js/**/*.js', '!src/js/lib/**/*.js'])
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('default'));
 });
 
-gulp.task('html', function () {
-    return gulp.src(['src/tmpls/base.html'])
-    // .pipe(htmlmin({collapseWhitespace: true}))
-    .pipe(gulp.dest('dist/assets'))
-    .pipe(notify({ message: 'HTML task complete' }));
-});
-
-// gulp.task('annotate', function () {
-//     return gulp.src('src/js/*.js')
-//     .pipe(ngAnnotate())
-//     .pipe(gulp.dest('src/js/*.js'));
-// });
-
-gulp.task('font', function () {
-    return gulp.src(['src/fonts/**'])
-    .pipe(gulp.dest('dist/assets/fonts'));
-});
-
-gulp.task('tmpls', function () {
+// create tamplate cache
+gulp.task('tmpls', ['lint'], function () {
   return gulp.src('src/tmpls/**/*.html')
     .pipe(templateCache())
     .pipe(gulp.dest('src/js/angulars/configs'));
 });
 
+// this task build all angular modules to ng.min,js
+gulp.task('js-ng-app', ['tmpls'], function () {
+    return gulp.src(['src/js/angulars/modules/*.js'])
+    .pipe(add.append(['src/js/angulars/**/*.js', '!src/js/angulars/modules/*.js']))
+    .pipe(concat('ng.js'))
+    .pipe(gulp.dest('dest/assets/js'))
+    .pipe(_if(isProduction, uglify(), beautify()))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(gulp.dest('dest/assets/js'));
+});
 
-gulp.task('js', ['lint', 'tmpls'], function() {
-
+//this task collect all libs
+gulp.task('js-lib', function () {
   return gulp.src(['src/js/app.js'])
     .pipe(browserify({
         debug: true,
         insertGlobals: true
     }))
-    .pipe(add.append('src/js/angulars/modules/*.js'))
-    .pipe(add.append(['src/js/angulars/**/*.js', '!src/js/angulars/modules/*.js']))
-    .pipe(concat('main.js'))
-    // .pipe(uglify())
-    .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest('dist/assets/js'))
-    .pipe(notify({ message: 'JS task complete' }));
+    .pipe(_if(isProduction, uglify(), beautify()))
+    .pipe(gulp.dest('dest/assets/js/libs.min.js'));
 });
 
+// this task unite ng-modules and libs
+gulp.task('js',['js-ng-app', 'js-lib'] ,function() {
+  return gulp.src('dest/assets/js/libs.js')
+    .pipe(add.append('dest/assets/js/ng.min.js'))
+    .pipe(concat('main.min.js'))
+    .pipe(gulp.dest('dest/assets/js'));
+});
+
+// ============ OTHER ASSESTS TASK ============
+// copies fonts from src to dest
+gulp.task('font', function () {
+    return gulp.src(['src/fonts/**'])
+    .pipe(gulp.dest('dest/assets/fonts'));
+});
+
+// this task minify images
 gulp.task('img', function() {
   return gulp.src('src/img/**/*')
     .pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
-    .pipe(gulp.dest('dist/assets/img'))
+    .pipe(gulp.dest('dest/assets/img'))
     .pipe(notify({ message: 'IMG task complete' }));
 });
 
+// minifies html
+gulp.task('html', function () {
+    return gulp.src(['src/tmpls/base.html'])
+    .pipe(_if(isProduction, htmlmin({collapseWhitespace: true})))
+    .pipe(gulp.dest('dest/assets'))
+    .pipe(notify({ message: 'HTML task complete' }));
+});
+
+//collects all css files and concat them
+gulp.task('css', function() {
+  return gulp.src('src/css/main.min.css')
+    .pipe(add.append(['src/css/**', '!src/css/main.min.css']))
+    .pipe(concat('base.css'))
+    .pipe(gulp.dest('dest/assets/css'))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(_if(isProduction, cssnano(), cssbeautify()))
+    .pipe(gulp.dest('dest/assets/css'))
+    .pipe(notify({ message: 'CSS task complete' }));
+});
+
 gulp.task('clean', function() {
-    return del(['dist']);
+    return del(['dest']);
 });
 
 gulp.task('all', ['clean'], function() {
-  return gulp.start('css', 'js', 'img', 'html', 'font');
+  return gulp.start( 'js', 'css', 'img', 'html', 'font');
 });
 
-gulp.task('default', ['css', 'js', 'img', 'html', 'font'], function() {
+gulp.task('default', ['all'], function() {
   runSequence('deploy', 'watch');
 });
 
@@ -124,12 +143,12 @@ gulp.task('watch', function() {
   gulp.watch('src/tmpls/base.html', reactOn('html'));
 
 
-  // Watch any files in dist/, reload on change
-  gulp.watch(['dist/**']);
+  // Watch any files in dest/, reload on change
+  gulp.watch(['dest/**']);
 });
 
 gulp.task('deploy', function () {
-  return gulp.src('dist/**/**')
+  return gulp.src('dest/**/**')
     .pipe(gulp.dest('../bs/public/MafSite/'))
     .pipe(livereload());
 });
