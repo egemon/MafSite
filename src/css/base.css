@@ -169,7 +169,10 @@ article p:last-child {
     border-style: ridge;
     transition: all 1.5s ease;
 }
-
+.player-text-container {
+    width: 194px;
+    float: right;
+}
 .player-logo:hover,
 .photo-logo:hover {
     transform: scale(-1,1);
@@ -209,7 +212,6 @@ article p:last-child {
     display: inline-block;
     vertical-align: top;
     width: 350px;
-    height: 200px;
     margin: 10px;
     text-overflow: ellipsis;
     font-family: "MainTextFont", Georgia, 'Times New Roman', serif;
@@ -341,6 +343,10 @@ protocol th {
     color: black;
     text-align: center;
     font-weight: 100;
+}
+.metadata-container [metadata] td,
+.protocol-container .player-container td {
+    vertical-align: middle;
 }
 
 protocol .btn-primary {
