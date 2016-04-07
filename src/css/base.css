@@ -31,6 +31,7 @@ html {
 }
 body {
     height: 100%;
+    color: #000;
 }
 #page-container {
     height: 100%;
@@ -267,6 +268,7 @@ article p:last-child {
 #ratingTable td,th {
     padding: 5px;
     text-align: center;
+    vertical-align: middle;
     font-size: 25px;
     word-wrap: break-word;
 }
@@ -367,4 +369,9 @@ protocol #timerTime {
 }
 protocol #timerContainer {
     border-color: #000;
+}
+
+a:focus, a:hover {
+    color: #000;
+    text-decoration: none;
 }

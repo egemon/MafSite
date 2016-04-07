@@ -17,7 +17,8 @@ var gulp = require('gulp'),
     del = require('del');
 
 gulp.task('css', function() {
-  return gulp.src('src/css/**')
+  return gulp.src('src/css/main.min.css')
+    .pipe(add.append(['src/css/**', '!src/css/main.min.css']))
     .pipe(concat('base.css'))
     .pipe(gulp.dest('dist/assets/css'))
     .pipe(rename({suffix: '.min'}))
@@ -88,7 +89,7 @@ gulp.task('all', ['clean'], function() {
   return gulp.start('css', 'js', 'img', 'html', 'font');
 });
 
-gulp.task('default', ['all'], function() {
+gulp.task('default', ['css', 'js', 'img', 'html', 'font'], function() {
   runSequence('deploy', 'watch');
 });
 
@@ -130,6 +131,5 @@ gulp.task('watch', function() {
 gulp.task('deploy', function () {
   return gulp.src('dist/**/**')
     .pipe(gulp.dest('../bs/public/MafSite/'))
-    .pipe(livereload())
-    .pipe(notify({ message: 'Deploy task complete' }));
+    .pipe(livereload());
 });
