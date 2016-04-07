@@ -54,12 +54,13 @@ gulp.task('js-lib', function () {
         insertGlobals: true
     }))
     .pipe(_if(isProduction, uglify(), beautify()))
-    .pipe(gulp.dest('dest/assets/js/libs.min.js'));
+    .pipe(rename('libs.min.js'))
+    .pipe(gulp.dest('dest/assets/js'));
 });
 
 // this task unite ng-modules and libs
 gulp.task('js',['js-ng-app', 'js-lib'] ,function() {
-  return gulp.src('dest/assets/js/libs.js')
+  return gulp.src('dest/assets/js/libs.min.js')
     .pipe(add.append('dest/assets/js/ng.min.js'))
     .pipe(concat('main.min.js'))
     .pipe(gulp.dest('dest/assets/js'));
