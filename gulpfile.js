@@ -77,16 +77,14 @@ gulp.task('font', function () {
 gulp.task('img', function() {
   return gulp.src('src/img/**/*')
     .pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
-    .pipe(gulp.dest('dest/assets/img'))
-    .pipe(notify({ message: 'IMG task complete' }));
+    .pipe(gulp.dest('dest/assets/img'));
 });
 
 // minifies html
 gulp.task('html', function () {
     return gulp.src(['src/tmpls/base.html'])
     .pipe(_if(isProduction, htmlmin({collapseWhitespace: true})))
-    .pipe(gulp.dest('dest/assets'))
-    .pipe(notify({ message: 'HTML task complete' }));
+    .pipe(gulp.dest('dest/assets'));
 });
 
 //collects all css files and concat them
@@ -97,8 +95,7 @@ gulp.task('css', function() {
     .pipe(gulp.dest('dest/assets/css'))
     .pipe(rename({suffix: '.min'}))
     .pipe(_if(isProduction, cssnano(), cssbeautify()))
-    .pipe(gulp.dest('dest/assets/css'))
-    .pipe(notify({ message: 'CSS task complete' }));
+    .pipe(gulp.dest('dest/assets/css'));
 });
 
 gulp.task('clean', function() {
@@ -109,8 +106,10 @@ gulp.task('all', ['clean'], function() {
   return gulp.start( 'js', 'css', 'img', 'html', 'font');
 });
 
-gulp.task('default', ['all'], function() {
-  runSequence('deploy', 'watch');
+gulp.task('all', [ 'js', 'css', 'img', 'html', 'font']);
+
+gulp.task('default', ['clean'], function() {
+  runSequence('all', 'deploy', 'watch');
 });
 
 
