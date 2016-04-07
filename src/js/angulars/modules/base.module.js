@@ -1,7 +1,7 @@
 angular.module('base', ['ui.router', 'server', 'ngAnimate', 'templates', 'ProtocolApp'],
-  ['CONFIG', 'PAGES', '$stateProvider', '$urlRouterProvider',
-  function(CONFIG, PAGES, $stateProvider, $urlRouterProvider) {
-    CONFIG.BASE_SERVER_URL = location.origin + '/';
+  ['CONFIG', 'club','PAGES', '$stateProvider', '$urlRouterProvider',
+  function(CONFIG, club, PAGES, $stateProvider, $urlRouterProvider) {
+    CONFIG.BASE_SERVER_URL = club.BASE_SERVER_URL = location.origin + '/';
     var tmplsUrl = CONFIG.TEMPLATES_URL;
     $urlRouterProvider.otherwise('/' + PAGES[0].url);
 
