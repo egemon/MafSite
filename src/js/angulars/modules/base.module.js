@@ -1,4 +1,4 @@
-angular.module('base', ['ui.router', 'server', 'ngAnimate', 'templates'],
+angular.module('base', ['ui.router', 'server', 'ngAnimate', 'templates', 'ProtocolApp'],
   ['CONFIG', 'PAGES', '$stateProvider', '$urlRouterProvider',
   function(CONFIG, PAGES, $stateProvider, $urlRouterProvider) {
     CONFIG.BASE_SERVER_URL = location.origin + '/';

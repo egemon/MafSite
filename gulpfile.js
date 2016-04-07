@@ -18,11 +18,12 @@ var gulp = require('gulp'),
 
 gulp.task('css', function() {
   return gulp.src('src/css/**')
+    .pipe(concat('base.css'))
     .pipe(gulp.dest('dist/assets/css'))
     .pipe(rename({suffix: '.min'}))
     // .pipe(cssnano())
     .pipe(gulp.dest('dist/assets/css'))
-    .pipe(notify({ message: 'Styles task complete' }));
+    .pipe(notify({ message: 'CSS task complete' }));
 });
 
 gulp.task('lint', function () {
@@ -34,7 +35,8 @@ gulp.task('lint', function () {
 gulp.task('html', function () {
     return gulp.src(['src/tmpls/base.html'])
     // .pipe(htmlmin({collapseWhitespace: true}))
-    .pipe(gulp.dest('dist/assets'));
+    .pipe(gulp.dest('dist/assets'))
+    .pipe(notify({ message: 'HTML task complete' }));
 });
 
 // gulp.task('annotate', function () {
@@ -68,22 +70,26 @@ gulp.task('js', ['lint', 'tmpls'], function() {
     // .pipe(uglify())
     .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest('dist/assets/js'))
-    .pipe(notify({ message: 'Scripts task complete' }));
+    .pipe(notify({ message: 'JS task complete' }));
 });
 
 gulp.task('img', function() {
   return gulp.src('src/img/**/*')
     .pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
     .pipe(gulp.dest('dist/assets/img'))
-    .pipe(notify({ message: 'Images task complete' }));
+    .pipe(notify({ message: 'IMG task complete' }));
 });
 
 gulp.task('clean', function() {
     return del(['dist']);
 });
 
-gulp.task('default', ['clean'], function() {
-  return gulp.start('css', 'js', 'img', 'htmlmin', 'font');
+gulp.task('all', ['clean'], function() {
+  return gulp.start('css', 'js', 'img', 'html', 'font');
+});
+
+gulp.task('default', ['all'], function() {
+  runSequence('deploy', 'watch');
 });
 
 
@@ -123,6 +129,7 @@ gulp.task('watch', function() {
 
 gulp.task('deploy', function () {
   return gulp.src('dist/**/**')
-    .pipe(gulp.dest('../bs/public/MafSite'))
-    .pipe(livereload());
+    .pipe(gulp.dest('../bs/public/MafSite/'))
+    .pipe(livereload())
+    .pipe(notify({ message: 'Deploy task complete' }));
 });

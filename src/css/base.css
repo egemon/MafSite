@@ -31,12 +31,12 @@ html {
 }
 body {
     height: 100%;
-
 }
 #page-container {
     height: 100%;
     margin: 0 auto;
     width: 90%;
+    background-color: transparent;
 }
 
 #page-container>* {
@@ -261,17 +261,19 @@ article p:last-child {
     margin: 5px 10px 5px 10px;
 }
 
-table {
+#ratingTable {
     width: 1135px;
 }
-td,th {
+#ratingTable td,th {
     padding: 5px;
     text-align: center;
     font-size: 25px;
     word-wrap: break-word;
 }
 
-.form-button {
+input,
+select,
+button {
     transition: all 1s;
     display: block;
     margin: 5px;
@@ -280,6 +282,7 @@ td,th {
     text-align: center;
     background-color: #f0dab4;
     cursor: pointer;
+    font-size: 20px;
 }
 
 .form-button.current,
@@ -326,4 +329,42 @@ td,th {
 
 .player-logo[vk^="http"]{
     cursor: pointer;
+}
+
+/*============= PROTOCOL =========*/
+protocol,
+protocol caption,
+protocol th {
+    font-family: "Barocco_Floral_Initial", Georgia, 'Times New Roman', serif;
+    color: black;
+    text-align: center;
+    font-weight: 100;
+}
+
+protocol .btn-primary {
+    background-color: #f0dab4;
+    color: #000;
+    border: none;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    transition: all 1s;
+}
+protocol .btn-primary:hover,
+protocol .btn-primary:active,
+protocol .btn-primary:active:focus,
+protocol .btn-primary:active:hover,
+protocol .btn-primary:focus,
+protocol .btn-primary:focus:hover {
+    box-shadow: 1px 1px 8px rgb(0, 0, 0);
+    position: relative;
+    bottom: 1px;
+    left: 1px;
+    background-color: rgb(217, 185, 128);
+    border: none;
+    outline-color: #000;
+}
+protocol #timerTime {
+    color: #000;
+}
+protocol #timerContainer {
+    border-color: #000;
 }
