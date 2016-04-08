@@ -1,8 +1,13 @@
-<div ng-hide="user.data.name">
-    <button class="form-button" id='showLogin' ng-click="isOrg = !isOrg">Я орг</button>
+<div>
+    <button class="form-button" id='showLogin' ng-click="isOrg = !isOrg">Логин</button>
     <div id="authform" ng-show="isOrg == true">
         <input class="form-input" id="user" type="text" placeholder="Ник" ng-model="user.data.nick">
         <input class="form-input" id="password" type="password" placeholder="Пароль" ng-model="user.data.password">
-        <button id="authButton" class="form-button" ng-click="login()">Войти</button>
+        <button
+            id="authButton"
+            class="form-button"
+            ng-click="login(user)">
+            Войти
+        </button>
     </div>
 </div>

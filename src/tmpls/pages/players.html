@@ -1,1 +1,14 @@
-{{data}}
+<table>
+    <thead>
+        <tr>
+            <th ng-repeat="(field, value) in players[0]">{{::field}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="(i, player) in players">
+            <td ng-repeat="(key, value) in player">
+                {{::value}}
+            </td>
+        </tr>
+    </tbody>
+</table>

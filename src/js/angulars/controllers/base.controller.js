@@ -1,5 +1,6 @@
 angular.module('base')
-.controller('baseCtrl', ['PAGES', '$scope', 'serverService', '$timeout', '$window', '$location',
+.controller('baseCtrl',
+['PAGES', '$scope', 'serverService', '$timeout', '$window', '$location',
 function(PAGES, $scope, serverService, $timeout, $window, $location) {
 
     animateLogo();
@@ -10,15 +11,14 @@ function(PAGES, $scope, serverService, $timeout, $window, $location) {
     $scope.PAGES = PAGES;
     $scope.isOrg = false;
     $scope.user = serverService.player;
-    console.log('$scope.user.memberLevel', $scope.user.memberLevel);
 
     $scope.login = login;
     $scope.setPage = setPage;
     $scope.openNewTab =  openNewTab;
 
     // ===== public methods
-    function login () {
-        serverService.$_login();
+    function login (user) {
+        serverService.$_login(user);
     }
 
     function setPage (page) {
@@ -48,7 +48,8 @@ function(PAGES, $scope, serverService, $timeout, $window, $location) {
 
     function fetchDataFor (page, needMemberLevel) {
         console.log('[base.controller] fetchDataFor()', arguments);
-        return serverService.$_fetchData(page.url, needMemberLevel).catch(handleError.bind(this, page));
+        return serverService.$_fetchData(page.url, needMemberLevel)
+            .catch(handleError.bind(this, page));
     }
 
     function handleData (page, response) {

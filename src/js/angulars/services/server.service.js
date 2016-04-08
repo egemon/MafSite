@@ -1,5 +1,6 @@
 angular.module('server')
-.service('serverService', ['$http', 'CONFIG', function serverService ($http, CONFIG) {
+.service('serverService', ['$http', 'CONFIG', '$cookies',
+    function serverService ($http, CONFIG, $cookies) {
 
     this.player = {
         data: {
@@ -14,7 +15,9 @@ angular.module('server')
             "experiance": ""
         }
     };
+    this.player.data = $cookies.getObject('player-data') || this.player.data;
 
+    console.log('this.player.data', this.player.data);
     serverService.prototype.$_fetchData = function(pageUrl, needMemberLevel) {
         console.log('[server.service] $_fetchData()', arguments);
         return $http.post(CONFIG.BASE_SERVER_URL + pageUrl,
@@ -27,11 +30,13 @@ angular.module('server')
 
     serverService.prototype.$_login = function() {
         console.log('[server.service] $_login()', arguments);
+        console.log('this.player.data', this.player.data);
         return $http.post(CONFIG.BASE_SERVER_URL + CONFIG.LOGIN_URL, {
-            user: this.player.data.nick,
-            password: this.player.data.password
-        }).catch(failCallback.bind(this))
-        .then(handleLogin.bind(this));
+                user: this.player.data.nick,
+                password: this.player.data.password
+            })
+            .catch(failCallback.bind(this))
+            .then(handleLogin.bind(this));
     };
 
     // ========== PRIVATE METHODS
@@ -50,6 +55,7 @@ angular.module('server')
             alert(data.errorText);
         } else {
             this.player.data = data;
+            $cookies.putObject('player-data', this.player.data);
         }
     }
 }]);
