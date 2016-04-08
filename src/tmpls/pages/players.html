@@ -6,8 +6,15 @@
     </thead>
     <tbody>
         <tr ng-repeat="(i, player) in players">
-            <td ng-repeat="(key, value) in player">
-                {{::value}}
+            <td ng-repeat="(key, value) in player" >
+            <div ng-if="key !== 'presents' && key !== 'honours'"> {{::value}}</div>
+            <div ng-if="key ==='presents'" ng-repeat="(i, present) in value">{{::present}}</div>
+            <div ng-if="key ==='honours'" ng-repeat="(i, honour) in value">
+                <div ng-repeat="(key, value) in honour">
+                    {{::key}} : {{::value}}
+                </div>
+            </div>
+
             </td>
         </tr>
     </tbody>
