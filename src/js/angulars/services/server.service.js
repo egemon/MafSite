@@ -39,6 +39,16 @@ angular.module('server')
             .then(handleLogin.bind(this));
     };
 
+    serverService.prototype.setPlayers = function(players) {
+        return $http.post(CONFIG.BASE_SERVER_URL + CONFIG.SET_PLAYERS_URL, {
+                user: this.player.data.nick,
+                password: this.player.data.password,
+                players: players
+            })
+            .catch(failCallback.bind(this))
+            .then(handleLogin.bind(this));
+    };
+
     // ========== PRIVATE METHODS
     function failCallback (needMemberLevel, err) {
         console.log('[server.service.js] failCallback()', err);

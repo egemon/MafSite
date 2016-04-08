@@ -379,3 +379,12 @@ a:focus, a:hover {
     color: #000;
     text-decoration: none;
 }
+
+/*============== PLAYERS ============*/
+.player-input {
+    height: 100%;
+}
+table,
+td {
+    height: 100%;
+}
