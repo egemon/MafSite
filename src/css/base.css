@@ -40,10 +40,6 @@ body {
     background-color: transparent;
 }
 
-#page-container>* {
-    max-width: 1135px;
-}
-
 /*============== HEADER =============*/
 
 #header {
@@ -264,9 +260,6 @@ article p:last-child {
     margin: 5px 10px 5px 10px;
 }
 
-#ratingTable {
-    width: 1135px;
-}
 #ratingTable td,
 #ratingTable th {
     padding: 5px;

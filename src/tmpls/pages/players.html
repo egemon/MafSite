@@ -1,4 +1,4 @@
-<table>
+<table class="table table-hover">
     <thead>
         <tr>
             <th ng-repeat="(field, value) in players[0]">{{::field}}</th>
@@ -7,11 +7,16 @@
     <tbody>
         <tr ng-repeat="(i, player) in players">
             <td ng-repeat="(key, value) in player" >
-            <div ng-if="key !== 'presents' && key !== 'honours'"> {{::value}}</div>
-            <div ng-if="key ==='presents'" ng-repeat="(i, present) in value">{{::present}}</div>
-            <div ng-if="key ==='honours'" ng-repeat="(i, honour) in value">
-                <div ng-repeat="(key, value) in honour">
-                    {{::key}} : {{::value}}
+            <div class="player-input"  ng-if="key !== 'presents' && key !== 'honours'"> {{::value}}</div>
+            <div class="player-present"  ng-if="key ==='presents'" ng-repeat="(j, present) in value track by $index ">{{::present}}</div>
+            <div ng-if="key ==='honours'" ng-repeat="(j, honour) in value track by $index">
+                <div  ng-repeat="(Key, value) in honour">
+                    <span class="player-honour-key">
+                        {{::Key}} :
+                    </span>
+                    <span class="player-honour-value">
+                        {{::value}}
+                    </span>
                 </div>
             </div>
 
