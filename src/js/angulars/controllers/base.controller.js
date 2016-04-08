@@ -25,7 +25,7 @@ function(PAGES, $scope, serverService, $timeout, $window, $location) {
         console.log('[baseCtrl] setPage()', arguments);
         $scope.page = page;
 
-        if (page.needData) {
+        if (page.needData || page.needMemberLevel) {
             fetchDataFor(page, page.needMemberLevel)
             .then(handleData.bind(this, page));
         }
@@ -56,7 +56,16 @@ function(PAGES, $scope, serverService, $timeout, $window, $location) {
         if (!response) {
             return;
         }
-        $scope[page.url] = response.data;
+        if (response.data.errorText) {
+            angular.element(document.getElementById('view'))
+                .css('visibility', 'hidden');
+            alert(response.data.errorText);
+            $location.path(setPage(PAGES[0]));
+        } else {
+            $scope[page.url] = response.data;
+            angular.element(document.getElementById('view'))
+                .css('visibility', 'visible');
+        }
     }
 
     function handleError (page, err) {

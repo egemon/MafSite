@@ -22,7 +22,7 @@ angular.module('server')
                 user: this.player.data.nick,
                 password: this.player.data.password
             } : '')
-        .catch(failCallback.bind(this));
+        .catch(failCallback.bind(this, needMemberLevel));
     };
 
     serverService.prototype.$_login = function() {
@@ -35,7 +35,7 @@ angular.module('server')
     };
 
     // ========== PRIVATE METHODS
-    function failCallback (err) {
+    function failCallback (needMemberLevel, err) {
         console.log('[server.service.js] failCallback()', err);
         throw {
             status: err.status,

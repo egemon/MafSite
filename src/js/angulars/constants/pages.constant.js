@@ -40,7 +40,7 @@ angular.module('base')
     name: 'Бланки',
     needMemberLevel: 3
 },{
-    url: 'admin',
-    name: 'База',
+    url: 'players',
+    name: 'Игроки',
     needMemberLevel: 3
 }]);
