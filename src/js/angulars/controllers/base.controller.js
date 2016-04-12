@@ -3,8 +3,6 @@ angular.module('base')
 ['PAGES', '$scope', 'serverService', '$timeout', '$window', '$location',
 function(PAGES, $scope, serverService, $timeout, $window, $location) {
 
-    animateLogo();
-
     var editableField = null;
     var editablePlayer = null;
     var pageUrl = $location.path().slice(1);
@@ -43,13 +41,6 @@ function(PAGES, $scope, serverService, $timeout, $window, $location) {
     }
 
     // ===== private mehtods
-
-    function animateLogo () {
-        $scope.logoClass = 'animating-started';
-        $timeout(function () {
-            $scope.logoClass = 'animating-ended';
-        }, 1500);
-    }
 
     function fetchDataFor (page, needMemberLevel) {
         console.log('[base.controller] fetchDataFor()', arguments);
