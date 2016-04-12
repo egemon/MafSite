@@ -21,9 +21,6 @@ function(PAGES, $scope, serverService, $timeout, $window, $location) {
     $scope.blurFocus =  blurFocus;
     $scope.setPlayers =  setPlayers;
 
-
-
-
     // ===== public methods
     function login (user) {
         serverService.$_login(user);
