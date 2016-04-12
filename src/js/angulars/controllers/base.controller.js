@@ -8,7 +8,7 @@ function(PAGES, $scope, serverService, $timeout, $window, $location) {
     var editableField = null;
     var editablePlayer = null;
     var pageUrl = $location.path().slice(1);
-    var page = findPageByUrl(pageUrl);
+    var page = findPageByUrl(pageUrl) || PAGES[0];
     setPage(page);
     $scope.PAGES = PAGES;
     $scope.isOrg = false;
