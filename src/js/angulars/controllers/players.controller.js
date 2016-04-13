@@ -1,4 +1,5 @@
-angular.controller('playersCtrl', ['$scope', 'serverService', function($scope, serverService){
+angular.module('base')
+.controller('playersCtrl', ['$scope', 'serverService', function($scope, serverService){
     var editableField = null;
     var editablePlayer = null;
 

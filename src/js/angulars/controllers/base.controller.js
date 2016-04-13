@@ -23,7 +23,7 @@ function(PAGES, $scope, serverService, $timeout, $window, $location) {
         console.log('[baseCtrl] setPage()', arguments);
         $scope.page = page;
 
-        if (page.needData || page.needMemberLevel) {
+        if (page.needData) {
             fetchDataFor(page, page.needMemberLevel)
             .then(handleData.bind(this, page));
         }
