@@ -26,9 +26,11 @@ angular.module('base')
         blurFocus($event);
         editableField = angular.element($event.toElement);
         var value = editableField.html().trim();
+
         if (type === 'date') {
             value = editableField.attr('date');
         }
+
         console.log('[players.controller] startEdit() value = ', value);
         var input = angular.element('<input type="' + type + '" value="'+value+'" autofocus>');
         input.bind("keydown keypress", handleEnter);
@@ -76,17 +78,11 @@ angular.module('base')
         angular.element(document).on('click', blurFocus);
     }
 
-
     function addNewPlayer (user) {
         console.log('[players.controller] addPlayer() ', arguments);
         var newPlayerObj = angular.copy(user);
+        newPlayerObj.birthday =  dateFilter(newPlayerObj.birthday, 'yyyy-MM-dd');
         $scope.players.data.push(newPlayerObj);
-        console.log('$scope.players.data ', $scope.players.data);
     }
 
-
-    function dateToString(value) {
-        console.log('[players.controller] dateToString()', arguments);
-        return new Date(value).toLocaleDateString();
-    }
 }]);
