@@ -82,6 +82,7 @@ angular.module('base')
     function addNewPlayer (user) {
         console.log('[players.controller] addPlayer() ', arguments);
         var newPlayerObj = angular.copy(user);
+        _emptyUser(user);
         newPlayerObj.birthday =  dateFilter(newPlayerObj.birthday, 'yyyy-MM-dd');
         $scope.players.data.push(newPlayerObj);
     }
@@ -90,6 +91,13 @@ angular.module('base')
         var players = $scope.players.data;
         var i = players.indexOf(player);
         players.splice(i,1);
+    }
+
+
+    function _emptyUser(user) {
+        for(var key in user){
+            user[key] = "";
+        }
     }
 
 }]);
