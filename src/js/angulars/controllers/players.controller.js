@@ -6,6 +6,7 @@ angular.module('base')
     $scope.startEdit =  startEdit;
     $scope.blurFocus =  blurFocus;
     $scope.setPlayers =  setPlayers;
+    $scope.addBlurListener =  addBlurListener;
 
     function handleEnter(event) {
         if(event.which === 13) {
@@ -57,4 +58,8 @@ angular.module('base')
     function setPlayers(players) {
         serverService.setPlayers(players);
     }
-}])
+
+    function addBlurListener () {
+        angular.element(document).one('click', blurFocus);
+    }
+}]);

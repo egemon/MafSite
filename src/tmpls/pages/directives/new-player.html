@@ -1,0 +1,26 @@
+<td ng-repeat="(key, value) in player">
+<input
+    type="{{::newPlayer.types[key]}}"
+    key="{{::key}}"
+    ng-if="key !== 'presents' && key !== 'honours'"
+    ng-model="newPlayer.data[key]"
+>
+</input>
+<div class="hint">
+    Данные некорректны! Проверьте.
+</div>
+<div class="player-present"  ng-if="key ==='presents'" ng-repeat="(j, present) in value track by $index ">{{::present}}</div>
+<div ng-if="key ==='honours'" ng-repeat="(j, honour) in value track by $index">
+    <div  ng-repeat="(Key, value) in honour">
+        <span class="player-honour-key">
+            {{::Key}} :
+        </span>
+        <span class="player-honour-value">
+            {{::value}}
+        </span>
+    </div>
+</div>
+</td>
+<td>
+    <button id="add-player-button" ng-click="newPlayer.addPlayer()">+</button>
+</td>

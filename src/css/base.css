@@ -405,3 +405,16 @@ td {
 .players-table {
     margin-left: -5%;
 }
+
+input.ng-invalid {
+    border: 1px solid red;
+}
+
+.hint {
+    display: none;
+}
+
+input.ng-invalid+
+.hint {
+    display: block;
+}

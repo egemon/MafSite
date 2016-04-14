@@ -4,29 +4,14 @@
             <th ng-repeat="(field, value) in players[0]">{{::field}}</th>
         </tr>
     </thead>
-    <tbody>
-        <tr ng-repeat="(i, player) in players">
-            <td ng-repeat="(key, value) in player" >
-            <div
-                class="player-input"
-                key="{{::key}}"
-                ng-if="key !== 'presents' && key !== 'honours'"
-                ng-click="startEdit($event, player)"
-            >
-                {{::value}}
-            </div>
-            <div class="player-present"  ng-if="key ==='presents'" ng-repeat="(j, present) in value track by $index ">{{::present}}</div>
-            <div ng-if="key ==='honours'" ng-repeat="(j, honour) in value track by $index">
-                <div  ng-repeat="(Key, value) in honour">
-                    <span class="player-honour-key">
-                        {{::Key}} :
-                    </span>
-                    <span class="player-honour-value">
-                        {{::value}}
-                    </span>
-                </div>
-            </div>
-            </td>
+    <tbody ng-init="addBlurListener()">
+        <tr ng-repeat="(i, player) in players" ng-include="'pages/partials/player-tr.html'">
+        </tr>
+        <tr>
+            <tr new-player
+                sample="players[0]"
+                players="players"
+            ></tr>
         </tr>
     </tbody>
 </table>

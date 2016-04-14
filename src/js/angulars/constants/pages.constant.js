@@ -42,5 +42,6 @@ angular.module('base')
 },{
     url: 'players',
     name: 'Игроки',
+    needData: true,
     needMemberLevel: 3
 }]);
