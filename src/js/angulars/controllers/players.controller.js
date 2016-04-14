@@ -32,7 +32,6 @@ angular.module('base')
             value = editableField.attr('date');
         }
 
-        console.log('[players.controller] startEdit() value = ', value);
         var input = angular.element('<input type="' + type + '" value="'+value+'" autofocus>');
         input.bind("keydown keypress", handleEnter);
         editablePlayer = player;
@@ -57,6 +56,8 @@ angular.module('base')
         var input = editableField.find('input');
         input.unbind("keydown keypress", handleEnter);
         var newVal = input.val();
+
+
         if (input.attr('type') === 'date') {
             editableField.attr('date', newVal);
             newVal = dateFilter(newVal);

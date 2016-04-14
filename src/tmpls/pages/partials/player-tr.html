@@ -21,9 +21,13 @@
 <div
     ng-if="key ==='presents'"
     class="player-present"
-    ng-repeat="(j, present) in player[key] track by $index "
+
 >
-    {{::present}}
+    <div
+        ng-repeat="(j, present) in player[key] track by $index "
+    >
+        {{::present}}
+    </div>
 </div>
 
 <div
