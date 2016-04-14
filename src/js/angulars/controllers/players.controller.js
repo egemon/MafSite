@@ -8,6 +8,7 @@ angular.module('base')
     $scope.setPlayers =  setPlayers;
     $scope.addBlurListener =  addBlurListener;
     $scope.addNewPlayer =  addNewPlayer;
+    $scope.removePlayer =  removePlayer;
 
 
     function handleEnter(event) {
@@ -83,6 +84,12 @@ angular.module('base')
         var newPlayerObj = angular.copy(user);
         newPlayerObj.birthday =  dateFilter(newPlayerObj.birthday, 'yyyy-MM-dd');
         $scope.players.data.push(newPlayerObj);
+    }
+
+    function removePlayer (player) {
+        var players = $scope.players.data;
+        var i = players.indexOf(player);
+        players.splice(i,1);
     }
 
 }]);
