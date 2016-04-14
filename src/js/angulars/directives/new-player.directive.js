@@ -2,8 +2,8 @@ angular.module('base').directive('newPlayer', function(){
 
     return {
         scope: {
-            player: "=sample",
-            players:"="
+            fields:"=",
+            addPlayer: "&"
         },
         controller: "newPlayerCtrl as newPlayer",
         restrict: 'A',

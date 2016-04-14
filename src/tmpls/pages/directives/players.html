@@ -1,16 +1,16 @@
 <table class="table players-table table-hover">
     <thead>
         <tr>
-            <th ng-repeat="(field, value) in players[0]">{{::field}}</th>
+            <th ng-repeat="(j, field) in players.fields">{{::field}}</th>
         </tr>
     </thead>
     <tbody ng-init="addBlurListener()">
-        <tr ng-repeat="(i, player) in players" ng-include="'pages/partials/player-tr.html'">
+        <tr ng-repeat="(i, player) in players.data" ng-include="'pages/partials/player-tr.html'">
         </tr>
         <tr>
             <tr new-player
-                sample="players[0]"
-                players="players"
+                fields="players.fields"
+                add-player="addNewPlayer(player)"
             ></tr>
         </tr>
     </tbody>

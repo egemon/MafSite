@@ -1,5 +1,5 @@
 angular.module('base').controller('newPlayerCtrl', ['$scope',
-function($scope) {
+function() {
     this.types = {
         nick: 'text',
         password: 'password',
@@ -14,14 +14,5 @@ function($scope) {
     };
 
     this.data = {};
-
-    this.addPlayer = addPlayer;
-
-    // ========= METHODS =======
-    function addPlayer() {
-        var newPlayerObj = angular.copy(this.data);
-        $scope.players.push(newPlayerObj);
-        this.data = {};
-    }
 
 }]);

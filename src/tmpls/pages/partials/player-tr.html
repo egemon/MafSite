@@ -1,20 +1,43 @@
-<td ng-repeat="(key, value) in player" >
+<td ng-repeat="(j, key) in players.fields" >
 <div
     class="player-input"
     key="{{::key}}"
-    ng-if="key !== 'presents' && key !== 'honours'"
+    ng-if="key !== 'presents' && key !== 'honours' && key !== 'birthday'"
     ng-click="startEdit($event, player)"
 >
-    {{::value}}
+    {{::player[key]}}
 </div>
-<div class="player-present"  ng-if="key ==='presents'" ng-repeat="(j, present) in value track by $index ">{{::present}}</div>
-<div ng-if="key ==='honours'" ng-repeat="(j, honour) in value track by $index">
-    <div  ng-repeat="(Key, value) in honour">
+
+<div
+    class="player-input"
+    key="{{::key}}"
+    date="{{::player[key]}}"
+    ng-if="key === 'birthday'"
+    ng-click="startEdit($event, player, 'date')"
+>
+    {{::player[key] | date}}
+</div>
+
+<div
+    ng-if="key ==='presents'"
+    class="player-present"
+    ng-repeat="(j, present) in player[key] track by $index "
+>
+    {{::present}}
+</div>
+
+<div
+    ng-if="key ==='honours'"
+    ng-repeat="(j, honour) in player[key] track by $index"
+>
+    <div
+        ng-repeat="(Key, honour) in honour"
+    >
         <span class="player-honour-key">
             {{::Key}} :
         </span>
         <span class="player-honour-value">
-            {{::value}}
+            {{::honour}}
         </span>
     </div>
 </div>
