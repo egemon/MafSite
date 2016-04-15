@@ -4,6 +4,7 @@
     key="{{::key}}"
     ng-if="key !== 'presents' && key !== 'honours'"
     ng-click="startEdit($event, player, playersCtr.inputTypes[key])"
+    date = "{{::key == 'birthday' ? (player[key] | date:'yyyy-MM-dd') : ''}}"
 >
     {{::player[key]}}
 </div>
@@ -11,27 +12,35 @@
     Данные некорректны! Проверьте.
 </div>
 
-
+<!-- presents container -->
 <div
     class="player-presents-container"
     ng-if="key ==='presents'"
     data="{{::player.presents}}"
 >
+    <!-- player-continer in repeate -->
     <div
+        class = "present-container"
         ng-repeat="(j, present) in player[key] track by $index "
-        data={{::present}}
-        key="presents"
-        j="{{::j}}"
-        ng-click="startEdit($event, player)"
     >
-        {{::present}}
+        <span
+            data={{::present}}
+            key="presents"
+            j="{{::j}}"
+            ng-click="startEdit($event, player)"
+        >
+            {{::present}}
+        </span>
         <button class="remove-present-button" ng-click="removeItem(player.presents, present)">-</button>
     </div>
     <div>
-        <input type="text" ng-model="newPresent">
+        <input
+            class="new-present-input"
+            type="text"
+            ng-model="newPresent">
         <button
             class="add-present-button"
-            ng-click="addPresent(player.presents, newPresent)"
+            ng-click="addPresent(player.presents, newPresent); newPresent = ''"
         >+</button>
     </div>
 </div>
@@ -53,5 +62,5 @@
 </div>
 </td>
 <td>
-    <button id="remove-player-button" ng-click="removeItem(players.data, player)">-</button>
+    <button class="remove-player-button" ng-click="removeItem(players.data, player)">-</button>
 </td>

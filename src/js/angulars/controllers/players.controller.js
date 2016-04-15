@@ -33,17 +33,19 @@ function($scope, CONFIG, serverService, dateFilter) {
         console.log('[players.controller] startEdit()', arguments);
         type = type || 'text';
         var currentTarget = angular.element($event.toElement);
+        console.log('currentTarget', currentTarget);
         if (currentTarget.attr('autofocus') === '') {
             return;
         }
         blurFocus($event);
         editableField = angular.element($event.toElement);
+        console.log('editableField', editableField);
         var value = editableField.html().trim();
 
         if (type === 'date') {
             value = editableField.attr('date');
         }
-
+        console.log('value', value);
         var input = angular.element('<input type="' + type + '" value="'+value+'" autofocus>');
         input.bind("keydown keypress", handleEnter);
         editablePlayer = player;
