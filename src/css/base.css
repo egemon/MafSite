@@ -419,3 +419,8 @@ input.ng-invalid+
 .hint {
     display: block;
 }
+
+.remove-present-button,
+.add-present-button {
+    display: inline-block;
+}

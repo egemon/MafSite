@@ -5,16 +5,23 @@ angular.module('base')
 
     $scope.startEdit =  startEdit;
     $scope.blurFocus =  blurFocus;
+    $scope.addPresent =  addPresent;
+
     $scope.setPlayers =  setPlayers;
     $scope.addBlurListener =  addBlurListener;
     $scope.addNewPlayer =  addNewPlayer;
-    $scope.removePlayer =  removePlayer;
+    $scope.removeItem =  removeItem;
 
 
     function handleEnter(event) {
         if(event.which === 13) {
             blurFocus(event);
         }
+    }
+
+    function addPresent (presents, newPresent) {
+        console.log('[players.controller] addPresents()', arguments);
+        presents.push(newPresent);
     }
 
     function startEdit($event, player, type) {
@@ -66,7 +73,12 @@ angular.module('base')
         editableField.html(newVal);
 
         var key = editableField.attr('key');
-        editablePlayer[key] = newVal;
+        var iterator = editableField.attr('j');
+        if (iterator) {
+            editablePlayer[key][iterator] = newVal;
+        } else {
+            editablePlayer[key] = newVal;
+        }
 
         editableField = null;
         editablePlayer = null;
@@ -88,8 +100,7 @@ angular.module('base')
         $scope.players.data.push(newPlayerObj);
     }
 
-    function removePlayer (player) {
-        var players = $scope.players.data;
+    function removeItem (players, player) {
         var i = players.indexOf(player);
         players.splice(i,1);
     }

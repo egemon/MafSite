@@ -48,11 +48,14 @@ function(PAGES, $scope, serverService, $timeout, $window, $location) {
         if (!response) {
             return;
         }
+
         if (response.data.errorText) {
             angular.element(document.getElementById('view'))
                 .css('visibility', 'hidden');
             alert(response.data.errorText);
             $location.path(setPage(PAGES[0]));
+        } else if(response.data.succesText) {
+            alert(response.data.succesText);
         } else {
             $scope[page.url] = response.data;
             angular.element(document.getElementById('view'))

@@ -9,8 +9,11 @@
         </tr>
         <tr>
             <tr new-player
+                add-present="addPresent(presents, present)"
                 fields="players.fields"
                 add-player="addNewPlayer(player)"
+                start-edit="startEdit($event, player)"
+                remove-item="removeItem(items, item)"
             ></tr>
         </tr>
     </tbody>

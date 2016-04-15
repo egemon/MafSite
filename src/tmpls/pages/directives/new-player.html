@@ -9,13 +9,40 @@
 <div class="hint">
     Данные некорректны! Проверьте.
 </div>
+
+
+<!-- presents container -->
 <div
-    class="player-present"
     ng-if="key ==='presents'"
-    ng-repeat="(j, present) in player[key] track by $index "
+    class="player-present"
+    data="{{::newPlayer.data.presents}}"
 >
-    {{::present}}
+    <!-- player-continer in repeate -->
+    <div
+        ng-repeat="(j, present) in newPlayer.data.presents track by $index "
+    >
+        <span
+            data={{::present}}
+            key="presents"
+            j="{{::j}}"
+            ng-click="startEdit({$event: $event, player: newPlayer.data})"
+        >
+            {{::present}}
+        </span>
+        <button class="remove-present-button" ng-click="removeItem({items: newPlayer.data.presents, item: present})">-</button>
+    </div>
+
+    <!--  new present container-->
+    <div>
+        <input type="text" ng-model="newPresent">
+        <button
+            class="add-present-button"
+            ng-click="addPresent({presents: newPlayer.data.presents, present: newPresent})"
+        >+</button>
+    </div>
 </div>
+
+
 <div ng-if="key ==='honours'" ng-repeat="(j, honour) in player[key] track by $index">
     <div  ng-repeat="(Key, honour) in honour">
         <span class="player-honour-key">

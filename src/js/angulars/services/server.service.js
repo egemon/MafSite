@@ -52,10 +52,13 @@ angular.module('server')
     // ========== PRIVATE METHODS
     function failCallback (needMemberLevel, err) {
         console.log('[server.service.js] failCallback()', err);
-        throw {
-            status: err.status,
-            text: err.statusText
-        };
+        if (err) {
+            var obj = {
+                status: err.status,
+                text: err.statusText
+            };
+            return obj;
+        }
     }
 
     function handleLogin (response) {

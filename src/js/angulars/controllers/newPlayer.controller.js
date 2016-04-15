@@ -13,6 +13,9 @@ function() {
         experiance: 'text'
     };
 
-    this.data = {};
+    this.data = {
+        presents: [],
+        honours: []
+    };
 
 }]);
