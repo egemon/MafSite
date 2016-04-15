@@ -6,7 +6,7 @@
     ng-click="startEdit($event, player, playersCtr.inputTypes[key])"
     date = "{{::key == 'birthday' ? (player[key] | date:'yyyy-MM-dd') : ''}}"
 >
-    {{::player[key]}}
+    {{::key == 'birthday' ? (player[key] | date) : player[key]}}
 </div>
 <div class="hint">
     Данные некорректны! Проверьте.
