@@ -7,10 +7,11 @@ function(PAGES, $scope, serverService, $timeout, $window, $location) {
     var firstPage = findPageByUrl(pageUrl) || PAGES[0];
     setPage(firstPage);
     $scope.PAGES = PAGES;
-    $scope.isOrg = false;
+    $scope.loginActive = false;
     $scope.user = serverService.player;
 
     $scope.login = login;
+
     $scope.setPage = setPage;
     $scope.openNewTab =  openNewTab;
 
