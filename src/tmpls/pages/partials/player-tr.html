@@ -2,11 +2,21 @@
 <div
     class="player-input"
     key="{{::key}}"
-    ng-if="key !== 'presents' && key !== 'honours' && key !== 'birthday'"
+    ng-if="key !== 'presents' && key !== 'honours' && key !== 'birthday' && key !== 'memberLevel'"
     ng-click="startEdit($event, player)"
 >
     {{::player[key]}}
 </div>
+
+<div
+    class="player-input"
+    key="{{::key}}"
+    ng-if="key == 'memberLevel'"
+    ng-click="startEdit($event, player, 'number')"
+>
+    {{::player[key]}}
+</div>
+
 
 <div
     class="player-input"
