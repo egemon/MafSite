@@ -80,9 +80,15 @@ function($scope, CONFIG, serverService, dateFilter) {
         editableField.html(newVal);
 
         var key = editableField.attr('key');
-        var iterator = editableField.attr('j');
+        var iterator = editableField.attr('iterator');
+        var clue = editableField.attr('clue');
+        console.log('iterator = ', iterator);
         if (iterator) {
-            editablePlayer[key][iterator] = newVal;
+            if (clue) {
+                editablePlayer[key][iterator][clue] = newVal;
+            } else {
+                editablePlayer[key][iterator] = newVal;
+            }
         } else {
             editablePlayer[key] = newVal;
         }
