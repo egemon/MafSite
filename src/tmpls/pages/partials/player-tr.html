@@ -2,31 +2,15 @@
 <div
     class="player-input"
     key="{{::key}}"
-    ng-if="key !== 'presents' && key !== 'honours' && key !== 'birthday' && key !== 'memberLevel'"
-    ng-click="startEdit($event, player)"
+    ng-if="key !== 'presents' && key !== 'honours'"
+    ng-click="startEdit($event, player, playersCtr.inputTypes[key])"
 >
     {{::player[key]}}
 </div>
-
-<div
-    class="player-input"
-    key="{{::key}}"
-    ng-if="key == 'memberLevel'"
-    ng-click="startEdit($event, player, 'number')"
->
-    {{::player[key]}}
+<div class="hint">
+    Данные некорректны! Проверьте.
 </div>
 
-
-<div
-    class="player-input"
-    key="{{::key}}"
-    date="{{::player[key]}}"
-    ng-if="key === 'birthday'"
-    ng-click="startEdit($event, player, 'date')"
->
-    {{::player[key] | date}}
-</div>
 
 <div
     class="player-presents-container"

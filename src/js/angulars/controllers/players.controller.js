@@ -1,5 +1,10 @@
 angular.module('base')
-.controller('playersCtrl', ['$scope', 'serverService', 'dateFilter', function($scope, serverService, dateFilter){
+.controller('playersCtrl',
+['$scope', 'CONFIG', 'serverService', 'dateFilter',
+function($scope, CONFIG, serverService, dateFilter) {
+
+    this.inputTypes = CONFIG.inputTypes;
+
     var editableField = null;
     var editablePlayer = null;
 

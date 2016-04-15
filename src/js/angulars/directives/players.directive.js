@@ -4,7 +4,7 @@ angular.module('base').directive('players', function(){
 		scope: {
 			players: "="
 		},
-		controller: "playersCtrl",
+		controller: "playersCtrl as playersCtr",
 		restrict: 'E',
 		templateUrl: 'pages/directives/players.html'
 	};

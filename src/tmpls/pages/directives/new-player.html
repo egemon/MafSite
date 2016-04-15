@@ -1,6 +1,6 @@
 <td ng-repeat="(i, key) in fields">
 <input
-    type="{{::newPlayer.types[key]}}"
+    type="{{::playersCtr.inputTypes[key]}}"
     key="{{::key}}"
     ng-if="key !== 'presents' && key !== 'honours'"
     ng-model="newPlayer.data[key]"
