@@ -1,0 +1,24 @@
+<select
+     class="rating-select"
+    ng-model="ratingCtr.periodType">
+    <option
+        ng-repeat="(periodType, val) in ratingCtr.filterFields"
+        value="{{::periodType}}"
+        >
+        {{::val.name}}
+    </option>
+</select>
+<select
+     class="rating-select"
+    ng-model="ratingCtr.period"
+    ng-show="ratingCtr.periodType !== 'year'"
+    ng-options="item as item.name for item in ratingCtr.currentPeriodTypes track by item.value"
+    >
+</select>
+<select
+     class="rating-select"
+    ng-model="ratingCtr.year"
+    ng-options="item as item.name for item in ratingCtr.filterFields.year.value track by item.value"
+    >
+</select>
+<button class="show-rating-button" ng-click="ratingCtr.getRating()">Показать рейтинг</button>
