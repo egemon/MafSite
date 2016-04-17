@@ -102,10 +102,6 @@ gulp.task('clean', function() {
     return del(['dest']);
 });
 
-gulp.task('all', ['clean'], function() {
-  return gulp.start( 'js', 'css', 'img', 'html', 'font');
-});
-
 gulp.task('all', [ 'js', 'css', 'img', 'html', 'font']);
 
 gulp.task('default', ['clean'], function() {

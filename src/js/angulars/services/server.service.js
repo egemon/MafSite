@@ -18,15 +18,14 @@ angular.module('server')
     this.player.data = $cookies.getObject('player-data') || this.player.data;
 
     console.log('this.player.data', this.player.data);
-    serverService.prototype.$_fetchData = function(page, needMemberLevel) {
+    serverService.prototype.$_fetchData = function(page, needMemberLevel, data) {
         console.log('[server.service] $_fetchData()', arguments);
+        if (needMemberLevel) {
+            addCredenitals(data);
+        }
 
-
-        return $http.post(CONFIG.BASE_SERVER_URL + page.url,
-            needMemberLevel ? {
-                user: this.player.data.nick,
-                password: this.player.data.password
-            } : '')
+        return $http.post(CONFIG.BASE_SERVER_URL + page.url, {
+            data: data})
         .catch(failCallback.bind(this, needMemberLevel))
         .then(handleData.bind(this, page));
     };
@@ -96,6 +95,13 @@ angular.module('server')
                 .css('visibility', 'visible');
             return response.data;
         }
+    }
+
+    function addCredenitals(data) {
+        data.credentials = {
+            user: this.player.data.nick,
+            password: this.player.data.password
+        };
     }
 }]);
 

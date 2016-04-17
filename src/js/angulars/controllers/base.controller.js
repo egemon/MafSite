@@ -14,6 +14,7 @@ function(PAGES, $scope, serverService, $timeout, $window, $location) {
 
     $scope.setPage = setPage;
     $scope.openNewTab =  openNewTab;
+    $scope.fetchDataFor = fetchDataFor;
 
     // ===== public methods
     function login (user) {
@@ -39,15 +40,15 @@ function(PAGES, $scope, serverService, $timeout, $window, $location) {
         }
     }
 
-    // ===== private mehtods
-
-    function fetchDataFor (page, needMemberLevel) {
+    function fetchDataFor (page, needMemberLevel, data) {
         console.log('[base.controller] fetchDataFor()', arguments);
 
-        return serverService.$_fetchData(page, needMemberLevel)
+        return serverService.$_fetchData(page, needMemberLevel, data)
             .catch(handleError.bind(this, page))
             .then(attchDataToScope.bind(this, $scope, page));
     }
+
+    // ===== private mehtods
 
 
     function handleError (page, err) {
