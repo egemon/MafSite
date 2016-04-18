@@ -28,6 +28,9 @@ function(PAGES, $scope, serverService, $timeout, $window, $location) {
 
         $scope.page = page;
         if (page.needData) {
+            if (page.url == 'rating') {
+                $scope.$broadcast('rating-request');
+            }
             fetchDataFor(page, page.needMemberLevel);
         }
     }

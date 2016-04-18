@@ -17,8 +17,8 @@ angular.module('base', ['ui.router', 'server', 'ngAnimate', 'templates', 'Protoc
     }
   }
 ]).run(['$rootScope', '$timeout', function generalRun ($rootScope, $timeout) {
-  
-    animateLogo($rootScope)
+
+    animateLogo($rootScope);
 
     function animateLogo ($scope) {
         $scope.logoClass = 'animating-started';

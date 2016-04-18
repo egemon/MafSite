@@ -2,13 +2,17 @@ angular.module('base').controller('ratingCtrl', ['$scope', 'CONFIG','serverServi
 function($scope, CONFIG) {
     var today = new Date();
     this.filterFields = CONFIG.filterFields;
+
     this.periodType = 'month';
     this.currentPeriodTypes = this.filterFields[this.periodType].value;
     this.period = getObjByValue(+today.toISOString().split('T')[0].split('-')[1], this.currentPeriodTypes);
     this.year = getObjByValue(today.getUTCFullYear(), this.filterFields.year.value);
 
 
+
     this.getRating = getRating;
+
+    $scope.$on('rating-request', restoreDefaults.bind(this));
 
     // ====== METHODS =========
     function getRating () {
@@ -27,6 +31,19 @@ function($scope, CONFIG) {
                 return array[i];
             }
         }
+    }
+
+    var defaults = {
+        periodType: this.periodType,
+        period: this.period,
+        year: this.year
+    };
+
+    function restoreDefaults() {
+        this.periodType = defaults.periodType;
+        this.currentPeriodTypes = this.filterFields[this.periodType].value;
+        this.period = defaults.period;
+        this.year = defaults.year;
     }
 
 }]);
