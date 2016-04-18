@@ -1,22 +1,27 @@
 <article ng-repeat="(i, new) in news">
-    <title>{{new.number}}ая встреча. Ждем Вас!</title>
-    <p>
-       Традиционно приглашаем Вас на <a href="https://vk.com/bs_vstrecha_{{new.number}}" target="_blank">встречу клуба</a> мафии Baker Street 221b!
+    <title class="article-title">
+      {{::new.type === 'встреча' ? new.number + new.title : new.title}}
+    </title>
+    <p class="entry">
+        {{::new.entry}}
+      <a href='{{:: new.vk || "https://vk.com/bs_vstrecha_" + new.number}}' target='_blank'>
+          глянуть вк...
+      </a>
     </p>
     <p>
-       Что? - {{new.what}}
+      Что? - {{::new.what}}
     </p>
     <p>
       Где? -
       <a href="https://goo.gl/oFev5u">
-       {{new.where}}
+       {{::new.where}}
       </a>
     </p>
     <p id="when{{i}}">
-       Когда? - {{new.when | date}}
+       Когда? - {{::new.when | date}}
     </p>
     <p>
-       Члеский взнос? - {{new.price}} за вечер игр
+       Сколько? - {{::new.price}} за вечер игр
     </p>
     <p>
       С уважением, команда организаторов.
