@@ -4,15 +4,14 @@ function($scope, CONFIG) {
     this.filterFields = CONFIG.filterFields;
 
     this.periodType = 'month';
-    this.currentPeriodTypes = this.filterFields[this.periodType].value;
-    this.period = getObjByValue(+today.toISOString().split('T')[0].split('-')[1], this.currentPeriodTypes);
+    this.period = getObjByValue(+today.toISOString().split('T')[0].split('-')[1], CONFIG.filterFields.month.value);
     this.year = getObjByValue(today.getUTCFullYear(), this.filterFields.year.value);
 
+    $scope.$on('rating-request', restoreDefaults.bind(this));
 
 
     this.getRating = getRating;
 
-    $scope.$on('rating-request', restoreDefaults.bind(this));
 
     // ====== METHODS =========
     function getRating () {
@@ -41,7 +40,6 @@ function($scope, CONFIG) {
 
     function restoreDefaults() {
         this.periodType = defaults.periodType;
-        this.currentPeriodTypes = this.filterFields[this.periodType].value;
         this.period = defaults.period;
         this.year = defaults.year;
     }
