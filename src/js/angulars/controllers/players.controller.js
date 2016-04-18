@@ -8,8 +8,8 @@ function($scope, CONFIG, editService,  serverService, dateFilter) {
 
     $scope.setPlayers = setPlayers;
     $scope.addNewPlayer = addNewPlayer;
-    $scope.removeItem = removeItem;
-    $scope.addPresent = addPresent;
+    $scope.removeItem = editService.removeItem;
+    $scope.addPresent = editService.addItem;
     $scope.startEdit = editService.startEdit;
 
     function setPlayers(players) {
@@ -19,25 +19,19 @@ function($scope, CONFIG, editService,  serverService, dateFilter) {
     function addNewPlayer (user) {
         console.log('[players.controller] addPlayer() ', arguments);
         var newPlayerObj = angular.copy(user);
-        _emptyUser(user);
-        newPlayerObj.birthday =  dateFilter(newPlayerObj.birthday, 'yyyy-MM-dd');
-        $scope.players.data.push(newPlayerObj);
+        emptyUser(user);
+        formatDate(newPlayerObj);
+        editService.addItem($scope.players.data, newPlayerObj);
     }
 
-    function removeItem (players, player) {
-        var i = players.indexOf(player);
-        players.splice(i,1);
-    }
-
-    function _emptyUser(user) {
+    function emptyUser(user) {
         for(var key in user){
             user[key] = "";
         }
     }
 
-    function addPresent (presents, newPresent) {
-        console.log('[edit.service] addPresents()', arguments);
-        presents.push(newPresent);
+    function formatDate(newPlayerObj) {
+        newPlayerObj.birthday =  dateFilter(newPlayerObj.birthday, 'yyyy-MM-dd');
     }
 
 }]);

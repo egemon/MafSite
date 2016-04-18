@@ -1,4 +1,4 @@
-angular.module('base').controller('contentsCtrl', ['$scope', 'CONFIG',
-function($scope, CONFIG) {
-
+angular.module('base').controller('contentsCtrl', ['$scope', 'editService',
+function($scope, editService) {
+    $scope.startEdit = editService.startEdit;
 }]);

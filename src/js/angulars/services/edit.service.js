@@ -4,15 +4,7 @@ function editService ($http, CONFIG, dateFilter) {
 
     var editableField = null;
     var editablePlayer = null;
-
-
     angular.element(document).on('click', blurFocus);
-
-    function handleEnter(event) {
-        if(event.which === 13) {
-            blurFocus(event);
-        }
-    }
 
     function startEdit($event, player, type) {
         console.log('[edit.service] startEdit()', arguments);
@@ -38,6 +30,13 @@ function editService ($http, CONFIG, dateFilter) {
         editableField.html('');
         editableField.append(input);
     }
+
+    function handleEnter(event) {
+        if(event.which === 13) {
+            blurFocus(event);
+        }
+    }
+
 
     function blurFocus($event) {
         console.log('[edit.service] blurFocus', arguments);
@@ -85,9 +84,20 @@ function editService ($http, CONFIG, dateFilter) {
     }
 
 
+    function removeItem (items, item) {
+        var i = items.indexOf(item);
+        items.splice(i,1);
+    }
+
+    function addItem (items, item) {
+        console.log('[edit.service] additems()', arguments);
+        items.push(item);
+    }
+
     return {
         startEdit:  startEdit,
-        blurFocus:  blurFocus
+        removeItem:  removeItem,
+        addItem:  addItem
     };
 
 }]);
