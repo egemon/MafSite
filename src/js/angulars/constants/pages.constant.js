@@ -44,4 +44,9 @@ angular.module('base')
     name: 'Игроки',
     needData: true,
     needMemberLevel: 3
+},{
+    url: 'contents',
+    name: 'Контент',
+    needData: true,
+    needMemberLevel: 3
 }]);

@@ -4,7 +4,7 @@
             <th ng-repeat="(j, field) in players.fields">{{::field}}</th>
         </tr>
     </thead>
-    <tbody ng-init="addBlurListener()">
+    <tbody>
         <tr ng-repeat="(i, player) in players.data" ng-include="'pages/partials/player-tr.html'">
         </tr>
         <tr>
