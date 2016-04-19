@@ -43,14 +43,17 @@ angular.module('server')
             .then(handleLogin.bind(this));
     };
 
-    serverService.prototype.setPlayers = function(players) {
-        console.log('[server.service] setPlayers()', players);
-        var data = {players: players};
+    serverService.prototype.setItems = function(items, field) {
+        console.log('[server.service] setPlayers()', items);
+        var data = {
+            field: field,
+            data: items
+        };
         addCredentials(data, this.player.data);
 
-        return $http.post(CONFIG.BASE_SERVER_URL + CONFIG.SET_PLAYERS_URL, data)
+        return $http.post(CONFIG.BASE_SERVER_URL + CONFIG.SET_URL, data)
             .catch(failCallback.bind(this))
-            .then(handleData.bind(this, 'players'));
+            .then(handleData.bind(this, field));
     };
 
     // ========== PRIVATE METHODS

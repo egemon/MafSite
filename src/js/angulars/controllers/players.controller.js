@@ -13,7 +13,7 @@ function($scope, CONFIG, editService,  serverService, dateFilter) {
     $scope.startEdit = editService.startEdit;
 
     function setPlayers(players) {
-        serverService.setPlayers(players);
+        serverService.setItems(players, 'players');
     }
 
     function addNewPlayer (user) {

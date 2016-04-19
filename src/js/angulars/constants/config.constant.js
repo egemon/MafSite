@@ -3,7 +3,7 @@ angular.module('config')
     TEMPLATES_URL: 'pages',
     BASE_SERVER_URL: 'http://bs-mafiaclub.rhcloud.com/', //http://bs-mafiaclub.rhcloud.com/
     LOGIN_URL: 'login',
-    SET_PLAYERS_URL: 'setplayers',
+    SET_URL: 'set',
     inputTypes: {
         nick: 'text',
         password: 'password',
