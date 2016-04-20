@@ -31,6 +31,7 @@ angular.module('server')
 
     serverService.prototype.$_login = function() {
         console.log('[server.service] $_login()', arguments);
+        $cookies.putObject('player-data', this.player.data);
 
         return $http.post(CONFIG.BASE_SERVER_URL + CONFIG.LOGIN_URL, {
                 credentials:{

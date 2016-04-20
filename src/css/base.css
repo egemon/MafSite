@@ -395,7 +395,7 @@ protocol #timerTime {
     color: #000;
 }
 protocol #timerContainer {
-    border-color: #000;
+    border-color: #fff;
 }
 
 a:focus, a:hover {
