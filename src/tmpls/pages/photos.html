@@ -9,3 +9,26 @@
     <p class="photo-title">{{photo.title}}</p>
     <p class="photo-date">{{photo.date}}</p>
 </div>
+<div ng-show="user.data.memberLevel >= 3">
+    <input
+        type="text"
+        ng-model="photo.title"
+    >
+    </input>
+    <input
+        type="date"
+        ng-model="photo.date"
+    >
+    </input>
+    <input
+        type="text"
+        ng-model="photo.href"
+    >
+    </input>
+    <input
+        type="text"
+        ng-model="photo.src"
+    >
+    </input>
+    <button id="add-player-button" ng-click="addItem(photos, photo)">+</button>
+</div>
