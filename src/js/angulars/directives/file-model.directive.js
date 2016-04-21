@@ -8,6 +8,13 @@ angular.module('base')
             console.log('[file-model] link:()', arguments);
             element.bind("change", function (changeEvent) {
                 console.log('[file-model] element.bind()', arguments);
+                if (changeEvent.target.files.length === 0) {
+                    console.log('[cancel]', arguments);
+                    scope.$apply(function () {
+                        scope.fileModel = '';
+                    });
+                    return;
+                }
                 var reader = new FileReader();
                 reader.onload = function (loadEvent) {
                     console.log('[file-model] reader.onload()', arguments);

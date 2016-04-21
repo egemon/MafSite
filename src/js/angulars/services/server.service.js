@@ -39,7 +39,7 @@ angular.module('server')
                     password: this.player.data.password
                 }
             })
-            .catch(failCallback.bind(this))
+            .catch(failCallback.bind(this, 0))
             .then(handleLogin.bind(this));
     };
 
@@ -51,15 +51,22 @@ angular.module('server')
         };
 
         return $http.post(CONFIG.BASE_SERVER_URL + CONFIG.SET_URL, data)
-            .catch(failCallback.bind(this))
+            .catch(failCallback.bind(this, 0))
             .then(handleData.bind(this, field));
     };
 
     // ========== PRIVATE METHODS
     function failCallback (needMemberLevel, err) {
-        console.log('[server.service] failCallback()', err);
-        if (err && err.status === -1) {
-            alert('Сервер недоступен. Проверьте интернет соединение и сообщите администратору');
+        console.log('[server.service] failCallback()', arguments);
+        switch(err.status) {
+            case 413:
+                alert('Слишком большой файл картинки, пожалуйста выберите другой!');
+                break;
+            case -1:
+               alert('Сервер недоступен. Проверьте интернет соединение и сообщите администратору');
+                break;
+            default:
+            alert('Cообщие администратору об ошибке: ' + err.statusText);
         }
     }
 
