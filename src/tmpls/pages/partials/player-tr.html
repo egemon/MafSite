@@ -2,7 +2,7 @@
 <div
     class="player-input"
     key="{{::key}}"
-    ng-if="key !== 'presents' && key !== 'honours'"
+    ng-if="key !== 'presents' && key !== 'honours' && key !== 'image'"
     ng-click="startEdit($event, player, playersCtr.inputTypes[key])"
     date = "{{::key == 'birthday' ? (player[key] | date:'yyyy-MM-dd') : ''}}"
 >
@@ -67,6 +67,15 @@
         </span>
     </div>
 
+</div>
+
+<div
+    ng-if="key ==='image'"
+    >
+    <input
+        type = "file"
+        file-model = "player.imgFile"
+    >
 </div>
 </td>
 <td>

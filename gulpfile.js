@@ -146,5 +146,6 @@ gulp.task('watch', function() {
 gulp.task('deploy', function () {
   return gulp.src('dest/**/**')
     .pipe(gulp.dest('../bs/public/MafSite/'))
-    .pipe(livereload());
+    .pipe(livereload())
+    .pipe(notify('Code deployed to server!'));
 });
