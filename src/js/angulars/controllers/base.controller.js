@@ -1,7 +1,7 @@
 angular.module('base')
 .controller('baseCtrl',
-['PAGES', '$scope', 'serverService', '$timeout', '$window', '$location',
-function(PAGES, $scope, serverService, $timeout, $window, $location) {
+['PAGES', '$scope', 'serverService', '$timeout', '$window', '$location', 'editService',
+function(PAGES, $scope, serverService, $timeout, $window, $location, editService) {
 
     var pageUrl = $location.path().slice(1);
     var firstPage = findPageByUrl(pageUrl) || PAGES[0];
@@ -15,6 +15,8 @@ function(PAGES, $scope, serverService, $timeout, $window, $location) {
     $scope.setPage = setPage;
     $scope.openNewTab =  openNewTab;
     $scope.fetchDataFor = fetchDataFor;
+    $scope.addItem = changePhoto.bind(this, 'addItem');
+    $scope.removeItem = changePhoto.bind(this, 'removeItem');
 
     // ===== public methods
     function login (user) {
@@ -49,6 +51,11 @@ function(PAGES, $scope, serverService, $timeout, $window, $location) {
         return serverService.$_fetchData(page, needMemberLevel, data)
             .catch(handleError.bind(this, page))
             .then(attchDataToScope.bind(this, $scope, page));
+    }
+
+    function changePhoto(command, photos, photo) {
+        editService[command](photos, photo);
+        serverService.setItems(photos, 'photos');
     }
 
     // ===== private mehtods

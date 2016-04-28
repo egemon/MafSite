@@ -240,6 +240,9 @@ article p:last-child {
     font-size: 23px;
 }
 
+.photo-title {
+    clear: both;
+}
 .honours {
     background: black;
     /*height: 46px;*/
