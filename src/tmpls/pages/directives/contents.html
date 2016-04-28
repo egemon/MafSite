@@ -10,6 +10,8 @@
             <td ng-repeat="(k, key) in contents.fields">
                 <div
                 ng-click="startEdit($event, meeting)"
+                class="content-block"
+                key="{{::key}}"
                 >
                 {{::meeting[key]}}
                 </div>

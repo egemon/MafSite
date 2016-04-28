@@ -1,8 +1,12 @@
 <td ng-repeat="(j, key) in players.fields" >
+<div ng-if="key === '#'">
+    {{::i+1}}
+</div>
+
 <div
     class="player-input"
     key="{{::key}}"
-    ng-if="key !== 'presents' && key !== 'honours' && key !== 'image'"
+    ng-if="key !== 'presents' && key !== 'honours' && key !== 'image' && key !== '#'"
     ng-click="startEdit($event, player, playersCtr.inputTypes[key])"
     date = "{{::key == 'birthday' ? (player[key] | date:'yyyy-MM-dd') : ''}}"
 >

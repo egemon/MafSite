@@ -1,26 +1,30 @@
-<article ng-repeat="(i, new) in news">
+<article class="article" ng-repeat="(i, new) in news">
     <title class="article-title">
       {{::new.type === 'встреча' ? new.number + new.title : new.title}}
     </title>
+    <img class="player-logo" ng-if="new.img"
+      ng-src="data-base/players/img/{{::new.img}}"
+      onerror="this.src = 'public/MafSite/assets/img/main_logo.png'; this.onerror=''"
+    >
     <p class="entry">
         {{::new.entry}}
-      <a href='{{:: new.vk || "https://vk.com/bs_vstrecha_" + new.number}}' target='_blank'>
+      <a ng-if="new.vk"  href='{{:: new.vk || "https://vk.com/bs_vstrecha_" + new.number}}' target='_blank'>
           глянуть вк...
       </a>
     </p>
-    <p>
+    <p ng-if="new.what">
       Что? - {{::new.what}}
     </p>
-    <p>
+    <p ng-if="new.where">
       Где? -
       <a href="https://goo.gl/oFev5u">
        {{::new.where}}
       </a>
     </p>
-    <p id="when{{i}}">
+    <p ng-if="new.when">
        Когда? - {{::new.when | date}}
     </p>
-    <p>
+    <p ng-if="new.price">
        Сколько? - {{::new.price}} за вечер игр
     </p>
     <p>
