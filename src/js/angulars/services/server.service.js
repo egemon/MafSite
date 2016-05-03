@@ -20,10 +20,6 @@ angular.module('server')
     serverService.prototype.$_fetchData = function(page, needMemberLevel, data) {
         console.log('[server.service] $_fetchData()', arguments);
 
-        if (needMemberLevel) {
-            data = data || {};
-        }
-
         return $http.post(CONFIG.BASE_SERVER_URL + page.url, data)
         .catch(failCallback.bind(this, needMemberLevel))
         .then(handleData.bind(this, page));
@@ -43,11 +39,12 @@ angular.module('server')
             .then(handleLogin.bind(this));
     };
 
-    serverService.prototype.setItems = function(items, field) {
+    serverService.prototype.setItems = function(items, field, path) {
         console.log('[server.service] setPlayers()', items);
         var data = {
             field: field,
-            data: items
+            data: items,
+            path: path || '',
         };
 
         return $http.post(CONFIG.BASE_SERVER_URL + CONFIG.SET_URL, data)

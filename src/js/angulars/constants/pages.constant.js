@@ -49,4 +49,9 @@ angular.module('base')
     name: 'Контент',
     needData: true,
     needMemberLevel: 3
+},{
+    url: 'register',
+    name: 'Регистрация',
+    needData: true,
+    needMemberLevel: 3
 }]);

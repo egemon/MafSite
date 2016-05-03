@@ -33,7 +33,7 @@ function(PAGES, $scope, serverService, $timeout, $window, $location, editService
             if (page.url == 'rating') {
                 $scope.$broadcast('rating-request');
             }
-            fetchDataFor(page, page.needMemberLevel);
+            fetchDataFor(page, page.needMemberLevel, page.data);
         }
     }
 
@@ -46,6 +46,7 @@ function(PAGES, $scope, serverService, $timeout, $window, $location, editService
     }
 
     function fetchDataFor (page, needMemberLevel, data) {
+        page = page || $scope.page;
         console.log('[base.controller] fetchDataFor()', arguments);
 
         return serverService.$_fetchData(page, needMemberLevel, data)
