@@ -13,6 +13,7 @@ angular.module('base')
 },{
     url: 'rating',
     name: 'Рейтинг',
+    controller: 'RatingCtrl as RatingCtrl',
     needData: true,
     needMemberLevel: 0
 },{

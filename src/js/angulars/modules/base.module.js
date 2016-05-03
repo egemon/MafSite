@@ -12,7 +12,8 @@ angular.module('base', ['ui.router', 'server', 'ngAnimate', 'templates', 'Protoc
       // var name = page.name;
       $stateProvider.state(url, {
         url: '/' + page.url,
-        templateUrl: tmplsUrl + url + '.html'
+        templateUrl: tmplsUrl + url + '.html',
+        controller: page.controller,
       });
     }
   }
