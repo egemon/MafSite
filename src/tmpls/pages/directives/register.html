@@ -1,8 +1,13 @@
 <button class="set-data-button" ng-click="setRegister(register.data, date)">Внести данные</button>
-<label>
-    Выберите дату
-    <input type="date" ng-model="date">
-</label>
+<div>
+    <label>
+        Дата встречи
+        <input type="date" ng-model="date">
+    </label>
+    <label>
+        Бюджет встречи: {{getSum()}}
+    </label>
+</div>
 
 <table class="table players-table table-hover">
     <thead>

@@ -12,9 +12,19 @@ angular.module('base').directive('register', ['serverService', function(serverSe
         link: function (scope) {
             console.log('[register.directive.js] link()', arguments);
 
+            // ========= INIT PART
             restoreDefaults();
             scope.$on('register-request', restoreDefaults);
+            scope.$watch('date', function(newValue, oldValue, scope) {
+                if (newValue === oldValue) {
+                    return;
+                }
+                scope.fetchDataFor(null, 3, {
+                    date: dateToStr(scope.date)
+                });
+            });
 
+            // ========= METHODS
             scope.setRegister = function setRegister(register, date) {
                 for (var i = 0; i < register.length; i++) {
                     if (register[i].nick === null) {
@@ -31,14 +41,15 @@ angular.module('base').directive('register', ['serverService', function(serverSe
                 serverService.setItems(register, 'register', '/' + dateToStr(date) + '.json');
             };
 
-            scope.$watch('date', function(newValue, oldValue, scope) {
-                if (newValue === oldValue) {
+            scope.getSum = function getSum() {
+                if (!scope.register) {
                     return;
                 }
-                scope.fetchDataFor(null, 3, {
-                    date: dateToStr(scope.date)
-                });
-            });
+                 return scope.register.data.reduce(function (prev, cur) {
+                    console.log('[register.directive.js] getSum() ', prev, cur);
+                     return prev + cur.sum;
+                 }, 0);
+            };
 
             // ====== HELPERS ========
 
