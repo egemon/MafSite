@@ -92,8 +92,8 @@ angular.module('server')
             return {
                 errorText: response.data.errorText
             };
-        } else if(response.data.succesText) {
-            alert(response.data.succesText);
+        } else if(response.data.successText) {
+            alert(response.data.successText);
         } else {
             angular.element(document.getElementById('view'))
                 .css('visibility', 'visible');

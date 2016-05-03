@@ -29,6 +29,7 @@ angular.module('base')
 },{
     url: 'photos',
     name: 'Фото',
+    controller: 'photosCtrl as photosCtrl',
     needData: true,
     needMemberLevel: 0
 },{
@@ -43,16 +44,19 @@ angular.module('base')
 },{
     url: 'players',
     name: 'Игроки',
+    controller: 'playersCtrl as playersCtrl',
     needData: true,
     needMemberLevel: 3
 },{
     url: 'contents',
     name: 'Контент',
+    controller: 'contentsCtrl as contentsCtrl',
     needData: true,
     needMemberLevel: 3
 },{
     url: 'register',
     name: 'Регистрация',
+    controller: 'registerCtrl as registerCtrl',
     needData: true,
     needMemberLevel: 3
 }]);

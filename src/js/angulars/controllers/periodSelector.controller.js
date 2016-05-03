@@ -33,7 +33,11 @@ function($scope, CONFIG) {
         $scope.year = defaults.year;
     }
 
-    function defaultPeriod (periodType) {
+    function defaultPeriod (periodType, oldPeriodType) {
+        if (periodType === oldPeriodType) {
+            return;
+        }
+
         if (periodType === 'year') {
             $scope.period.value = '';
             return;

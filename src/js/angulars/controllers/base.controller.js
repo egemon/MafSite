@@ -15,8 +15,8 @@ function(PAGES, $scope, serverService, $timeout, $window, $location, editService
     $scope.setPage = setPage;
     $scope.openNewTab =  openNewTab;
     $scope.fetchDataFor = fetchDataFor;
-    $scope.addItem = changePhoto.bind(this, 'addItem');
-    $scope.removeItem = changePhoto.bind(this, 'removeItem');
+    $scope.addItem = editService.addItem;
+    $scope.removeItem = editService.removeItem;
 
     // ===== public methods
     function login (user) {
@@ -59,10 +59,6 @@ function(PAGES, $scope, serverService, $timeout, $window, $location, editService
             .then(attchDataToScope.bind(this, $scope, page));
     }
 
-    function changePhoto(command, photos, photo) {
-        editService[command](photos, photo);
-        serverService.setItems(photos, 'photos');
-    }
 
     // ===== private mehtods
     function handleError (page, err) {

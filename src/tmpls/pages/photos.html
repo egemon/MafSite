@@ -1,7 +1,7 @@
 <div class="photo" ng-repeat="(i, photo) in photos">
     <button
         id="add-player-button"
-        ng-click="removeItem(photos, photo)"
+        ng-click="photosCtrl.removeItem(photos, photo)"
         ng-show="user.data.memberLevel >= 3">Удалить</button>
     <a href="{{::photo.href}}" title="{{::photo.title}}" target="_blank">
         <img class="photo-logo"
@@ -48,5 +48,5 @@
     >
     </input>
     </label>
-    <button id="add-player-button" ng-click="addItem(photos, newPhoto);newPhoto = {};">Добавить</button>
+    <button id="add-player-button" ng-click="photosCtrl.addItem(photos, newPhoto);newPhoto = {};">Добавить</button>
 </div>
