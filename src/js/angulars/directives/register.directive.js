@@ -46,9 +46,17 @@ angular.module('base').directive('register', ['serverService', function(serverSe
                     return;
                 }
                  return scope.register.data.reduce(function (prev, cur) {
-                    console.log('[register.directive.js] getSum() ', prev, cur);
                      return prev + cur.sum;
                  }, 0);
+            };
+
+            scope.isValid = function isValid() {
+                if (!scope.register) {
+                    return;
+                }
+                return scope.register.data.reduce(function (prev, cur) {
+                     return prev && cur.nick;
+                 }, true);
             };
 
             // ====== HELPERS ========
@@ -59,6 +67,15 @@ angular.module('base').directive('register', ['serverService', function(serverSe
 
             function restoreDefaults() {
                 scope.date = new Date();
+                serverService.$_fetchData({url:'players'}, 3).then(updateAutocomplete);
+            }
+
+
+            function updateAutocomplete(data) {
+                console.log('[register.directive.js] updateAutocomplete()', arguments);
+                scope.playerNicks = data.data.map(function(el) {
+                    return el.nick;
+                });
             }
         }
     };

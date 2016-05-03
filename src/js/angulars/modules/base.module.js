@@ -1,4 +1,4 @@
-angular.module('base', ['ui.router', 'server', 'ngAnimate', 'templates', 'ProtocolApp','ngCookies'],
+angular.module('base', ['ui.router', 'server', 'ngAnimate', 'templates', 'ProtocolApp','ngCookies', 'autocomplete'],
   ['CONFIG', 'club','PAGES', '$stateProvider', '$urlRouterProvider',
   function generalConfig (CONFIG, club, PAGES, $stateProvider, $urlRouterProvider) {
     CONFIG.BASE_SERVER_URL = club.BASE_SERVER_URL = location.origin + '/';

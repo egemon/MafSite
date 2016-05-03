@@ -1,4 +1,10 @@
-<button class="set-data-button" ng-click="setRegister(register.data, date)">Внести данные</button>
+<button class="set-data-button"
+ng-click="setRegister(register.data, date)"
+ng-disabled="!isValid()"
+>Внести данные</button>
+<div class="hint">
+    Введите ники всех игроков!
+</div>
 <div>
     <label>
         Дата встречи
@@ -25,9 +31,19 @@
                 {{:: i+1}}
             </td>
             <td
-                ng-repeat="(k, field) in register.fields"
+            ng-repeat="(k, field) in register.fields"
+            >
+                <autocomplete
+                ng-if="field.name === 'nick'"
+                ng-model="player[field.name]"
+                data="playerNicks"
+                ></autocomplete>
+
+                <input
+                ng-if="field.name !== 'nick'"
+                type="{{::field.type}}"
+                ng-model="player[field.name]"
                 >
-                <input type="{{::field.type}}" ng-model="player[field.name]">
             </td>
             <td>
                 <button ng-click="removeItem(register.data, player)"> - </button>
@@ -38,9 +54,20 @@
                 {{register.data.length + 1}}
             </td>
             <td
+
                 ng-repeat="(k, field) in register.fields"
                 >
-                <input type="{{::field.type}}" ng-model="newPlayer[field.name]">
+
+                <autocomplete
+                ng-if="field.name === 'nick'"
+                ng-model="newPlayer[field.name]"
+                data="playerNicks"
+                ></autocomplete>
+
+                <input
+                ng-if="field.name !== 'nick'"
+                type="{{::field.type}}"
+                ng-model="newPlayer[field.name]">
             </td>
             <td>
                 <button ng-click="addItem(register.data, newPlayer); newPlayer = {};">+</button>
