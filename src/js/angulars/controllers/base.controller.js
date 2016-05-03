@@ -33,6 +33,11 @@ function(PAGES, $scope, serverService, $timeout, $window, $location, editService
             if (page.url == 'rating') {
                 $scope.$broadcast('rating-request');
             }
+
+            if (page.url == 'register') {
+                $scope.$broadcast('register-request');
+            }
+
             fetchDataFor(page, page.needMemberLevel, page.data);
         }
     }
@@ -60,8 +65,6 @@ function(PAGES, $scope, serverService, $timeout, $window, $location, editService
     }
 
     // ===== private mehtods
-
-
     function handleError (page, err) {
         console.log('[base.controller] handleError()', arguments);
 
