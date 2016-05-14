@@ -22,7 +22,7 @@
       </a>
     </p>
     <p ng-if="new.when">
-       Когда? - {{::new.when | date}}
+       Когда? - {{::new.when | date: 'medium'}}
     </p>
     <p ng-if="new.price">
        Сколько? - {{::new.price}} за вечер игр

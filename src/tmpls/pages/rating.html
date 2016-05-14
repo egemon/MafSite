@@ -22,7 +22,7 @@
       <td id="{{::player.avatar}}">
         <img class="playerAvatarInRating"
         onerror="this.src='public/MafSite/assets/img/main_logo.png'; this.onerror=''"
-        ng-src="data-base/players/img/{{::player.nick}}.jpg"
+        ng-src="data-base/players/img/{{::player.nick.replace(/\s+/g, '')}}.jpg"
         alt="">
       </td>
       <td>{{::player.nick}}</td>
