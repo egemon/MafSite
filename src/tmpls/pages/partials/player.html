@@ -4,6 +4,7 @@
     alt="{{::player.nick}}"
     ng-click="openNewTab(player.vk)"
     vk={{::player.vk}}
+    onerror="this.src='public/MafSite/assets/img/main_logo.png'; this.onerror=''"
 >
 <div class="player-text-container">
     <p class="player-nick">{{::player.nick}}</p>

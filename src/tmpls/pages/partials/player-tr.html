@@ -50,30 +50,6 @@
 </div>
 
 <div
-    ng-if="key ==='honours'"
-    ng-repeat="(j, honour) in player.honours track by $index"
->
-    <div
-        class="honour-container"
-        ng-repeat="(clue, val) in honour"
-    >
-        <span class="player-honour-key">
-            {{::clue}} :
-        </span>
-        <span
-            class="player-honour-value"
-            key="{{::key}}"
-            clue="{{::clue}}"
-            iterator="{{::j}}"
-            ng-click="startEdit($event, player)"
-        >
-            {{::val}}
-        </span>
-    </div>
-
-</div>
-
-<div
     ng-if="key ==='image'"
     >
     <input

@@ -4,6 +4,20 @@
   year="RatingCtrl.year"
   ></period-selector>
 <button class="show-rating-button" ng-click="RatingCtrl.getRating()">Показать рейтинг</button>
+<span class="controls-text">
+  Игр
+</span>
+<input
+    class="number-input"
+    type="number"
+    name="edge"
+    placeholder=""
+    ng-model="gameEdge"
+    ng-init="gameEdge = 0"
+>
+<span class="controls-text">
+  Показать игроков, сыгравших не менее
+</span>
 
 <table class="table table-bordered" id="ratingTable" border='1'>
   <thead>
@@ -18,11 +32,16 @@
     </tr>
   </thead>
   <tbody>
-    <tr class="rating-row" id="{{::player.nick}}" ng-repeat="(i, player) in rating">
+    <tr
+        class="rating-row"
+        id="{{::player.nick}}"
+        ng-repeat="(i, player) in rating"
+        ng-show="player.gameNumber >= gameEdge"
+    >
       <td id="{{::player.avatar}}">
         <img class="playerAvatarInRating"
         onerror="this.src='public/MafSite/assets/img/main_logo.png'; this.onerror=''"
-        ng-src="data-base/players/img/{{::player.nick.replace(/\s+/g, '')}}.jpg"
+        ng-src="data-base/players/img/{{::player.nick.split(' ').join('')}}.jpg"
         alt="">
       </td>
       <td>{{::player.nick}}</td>
