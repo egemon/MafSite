@@ -26,6 +26,8 @@
     "angular": "^1.5.2",
     "angular-ui-router": "^0.2.18",
     "angular-animate": "^1.5.2",
-    "angular-cookies": "^1.5.3"
+    "angular-cookies": "^1.5.3",
+    "bootstrap-css": "^3.3.6",
+    "angular-autocomplete": "git://github.com/JustGoscha/allmighty-autocomplete.git"
   }
 }
