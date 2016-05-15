@@ -37,8 +37,8 @@ gulp.task('tmpls', ['lint'], function () {
 
 // this task build all angular modules to ng.min,js
 gulp.task('js-ng-app', ['tmpls'], function () {
-    return gulp.src(['src/js/angulars/modules/*.js'])
-    .pipe(add.append(['src/js/angulars/**/*.js', '!src/js/angulars/modules/*.js']))
+    return gulp.src(['src/js/angulars/modules/**/*.js'])
+    .pipe(add.append(['src/js/angulars/**/*.js', '!src/js/angulars/modules/**/*.js']))
     .pipe(concat('ng.js'))
     .pipe(gulp.dest('dest/assets/js'))
     .pipe(_if(isProduction, uglify(), beautify()))
@@ -135,9 +135,11 @@ gulp.task('watch', function() {
   // Watch image files
   gulp.watch('src/img/**/*', reactOn('img'));
 
-  // Watch image files
+  // Watch main html files
   gulp.watch('src/tmpls/base.html', reactOn('html'));
 
+  // Watch main tmpls files
+  gulp.watch('src/tmpls/pages/**/*.html', reactOn('tmpls'));
 
   // Watch any files in dest/, reload on change
   gulp.watch(['dest/**']);
