@@ -152,7 +152,10 @@ gulp.task('watch', function() {
   gulp.watch('src/**/*.css', reactOn('css'));
 
   // Watch .js files
-  gulp.watch(['src/**/*.js'], reactOn('js'));
+  gulp.watch(['src/**/*.js', '!src/configs/templates.js'], reactOn('js'));
+
+  // Watch .js files
+  gulp.watch(['src/configs/templates.js'], reactOn('js'));
 
   // Watch image files
   gulp.watch('src/assets/img/**/*', reactOn('img'));

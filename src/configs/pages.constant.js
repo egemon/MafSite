@@ -38,7 +38,7 @@ angular.module('base')
     needData: true,
     needMemberLevel: 0
 },{
-    url: 'protocols',
+    url: 'protocol',
     name: 'Бланки',
     needMemberLevel: 3
 },{
